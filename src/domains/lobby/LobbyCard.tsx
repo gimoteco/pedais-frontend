@@ -21,7 +21,7 @@ const Gradient = ({ children, ...props }) => {
 
 export const IMAGE_HEIGHT = 300;
 
-export const ImagePlaceholder = () => (
+export const ImagePlaceholder = ({ sx }) => (
   <Flex
     bg="gray"
     height={IMAGE_HEIGHT}
@@ -35,9 +35,17 @@ export const ImagePlaceholder = () => (
 
 function IconnedInformation({ info, Icon, tip }) {
   return (
-    <Flex color="white" alignItems="center">
+    <Flex
+      color="white"
+      alignItems="center"
+      sx={{
+        "&:not(:last-child)": {
+          mr: 3
+        }
+      }}
+    >
       <Icon alt={tip} size={24} />
-      <Text fontSize={2} fontWeight="bold" fontFamily={"heading"} ml={1}>
+      <Text variant="value" ml={1}>
         {info}
       </Text>
     </Flex>
@@ -61,7 +69,24 @@ export function LobbyInformation({ lobby }) {
           bottom: 0
         }}
       >
-        <Box fontSize={2}>
+        <Flex flexDirection="column" fontSize={2}>
+          <Flex justifyContent="flex-start" mb={1}>
+            <IconnedInformation
+              tip="participantes"
+              info={lobby.interested.length}
+              Icon={Users}
+            />
+            <IconnedInformation
+              tip="distância"
+              info={`${lobby.distance} km`}
+              Icon={Map}
+            />
+            <IconnedInformation
+              tip="altimetria"
+              info={`${lobby.elevationGain} m`}
+              Icon={ArrowUpRight}
+            />
+          </Flex>
           <Heading
             color={"white"}
             sx={{
@@ -80,25 +105,7 @@ export function LobbyInformation({ lobby }) {
               {lobby.group.name}
             </Text>
           )}
-        </Box>
-
-        <Box>
-          <IconnedInformation
-            tip="participantes"
-            info={lobby.interested.length}
-            Icon={Users}
-          />
-          <IconnedInformation
-            tip="distância"
-            info={`${lobby.distance} km`}
-            Icon={Map}
-          />
-          <IconnedInformation
-            tip="altimetria"
-            info={`${lobby.elevationGain} m`}
-            Icon={ArrowUpRight}
-          />
-        </Box>
+        </Flex>
       </Gradient>
     </Box>
   );

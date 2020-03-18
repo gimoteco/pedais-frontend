@@ -11,5 +11,13 @@ export const theme = {
     heading: "'Source Sans Pro', sans-serif",
     body: "'Source Sans Pro', sans-serif",
     serif: "'Source Sans Serif', serif"
+  },
+  text: {
+    value: {
+      fontWeight: "bold",
+      fontFamily: "heading",
+      whiteSpace: "nowrap",
+      fontSize: 2
+    }
   }
 };

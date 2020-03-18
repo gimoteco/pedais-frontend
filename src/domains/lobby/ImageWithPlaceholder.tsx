@@ -8,7 +8,7 @@ export const ImageWithPlaceholder = ({
   notLoadingDisplay = "block",
   className = undefined,
   ...imageProps
-}) => {
+}: any) => {
   const [loading, setLoading] = useState(true);
   return (
     <>
@@ -24,7 +24,7 @@ export const ImageWithPlaceholder = ({
           onLoad={() => setLoading(false)}
         />
       )}
-      {loading && <Placeholder />}
+      {loading && <Placeholder {...imageProps} />}
     </>
   );
 };

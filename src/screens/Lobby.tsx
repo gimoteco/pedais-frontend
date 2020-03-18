@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import { BasePage } from "../domains/layout/BasePage";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
-import { Box, Text } from "rebass";
+import { Box, Text, Flex } from "rebass";
 import { UserPlus, Share2, User } from "react-feather";
 import { IconButton } from "../sharedComponents/IconButton";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
@@ -34,7 +34,7 @@ function Section({ title, children }) {
   );
 }
 
-function AvatarPlaceholder() {
+function AvatarPlaceholder({ sx }) {
   return (
     <Box
       display="inline-flex"
@@ -45,7 +45,8 @@ function AvatarPlaceholder() {
       sx={{
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 99
+        borderRadius: 99,
+        ...sx
       }}
     >
       <User size={25} />
@@ -60,7 +61,11 @@ function Avatar({ user }) {
     <ImageWithPlaceholder
       url={user.avatarUrl}
       sx={{
-        borderRadius: 99
+        borderRadius: 99,
+        "&:not(:last-child)": {
+          mr: 1,
+          mb: 1
+        }
       }}
       width={AVATAR_SIZE}
       height={AVATAR_SIZE}
@@ -120,11 +125,11 @@ function Lobbies({ lobbyStore }) {
         </Section>
 
         <Section title={`Participantes (${lobby.interested.length})`}>
-          <Box>
+          <Flex flexWrap="wrap" justifyContent="space-between">
             {lobby.interested.map(user => (
               <Avatar key={user.email} user={user} />
             ))}
-          </Box>
+          </Flex>
         </Section>
       </Box>
     </BasePage>
