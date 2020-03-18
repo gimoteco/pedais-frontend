@@ -1,0 +1,19 @@
+fragment Lobby on Lobby {
+  id
+  name
+  distance
+  imageUrl
+  date
+  startPoint {
+    name
+  }
+  elevationGain
+  group {
+    name
+  }
+  interested {
+    id
+    name
+    avatarUrl
+  }
+}

@@ -1,0 +1,7 @@
+#import "../fragments/lobby.graphql"
+
+query lobby($id: ID!) {
+  lobby(id: $id) {
+    ...Lobby
+  }
+}

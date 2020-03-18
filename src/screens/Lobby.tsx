@@ -1,0 +1,134 @@
+import React, { useEffect } from "react";
+import { inject, observer } from "mobx-react";
+import { useParams } from "react-router-dom";
+import { BasePage } from "../domains/layout/BasePage";
+import { LobbyInformation } from "../domains/lobby/LobbyCard";
+import { Box, Text } from "rebass";
+import { UserPlus, Share2, User } from "react-feather";
+import { IconButton } from "../sharedComponents/IconButton";
+import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
+
+function Section({ title, children }) {
+  return (
+    <Box
+      mb={3}
+      sx={{
+        textTransform: "uppercase",
+        fontFamily: "serif"
+      }}
+    >
+      <Text
+        fontFamily="heading"
+        fontSize={3}
+        fontWeight="bold"
+        mb={2}
+        sx={{
+          textTransform: "uppercase"
+        }}
+      >
+        {title}
+      </Text>
+
+      {children}
+    </Box>
+  );
+}
+
+function AvatarPlaceholder() {
+  return (
+    <Box
+      display="inline-flex"
+      width={40}
+      height={40}
+      color="white"
+      bg="gray"
+      sx={{
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 99
+      }}
+    >
+      <User size={25} />
+    </Box>
+  );
+}
+
+const AVATAR_SIZE = 40;
+
+function Avatar({ user }) {
+  return (
+    <ImageWithPlaceholder
+      url={user.avatarUrl}
+      sx={{
+        borderRadius: 99
+      }}
+      width={AVATAR_SIZE}
+      height={AVATAR_SIZE}
+      Placeholder={AvatarPlaceholder}
+      notLoadingDisplay="inline-block"
+    />
+  );
+}
+
+function Lobbies({ lobbyStore }) {
+  const { id } = useParams();
+  const { lobby } = lobbyStore;
+
+  useEffect(() => {
+    lobbyStore.fetchLobby(id);
+  }, []);
+
+  if (!lobby) {
+    return null;
+  }
+
+  return (
+    <BasePage noPadding>
+      <LobbyInformation lobby={lobby} />
+
+      <Box padding={2}>
+        <IconButton Icon={UserPlus}>Participar</IconButton>
+
+        <IconButton bg="positive" Icon={Share2}>
+          Compartilhar
+        </IconButton>
+      </Box>
+
+      <Box p={2} color="text">
+        <Section title="Local de partida">
+          <Text
+            sx={{
+              textTransform: "uppercase"
+            }}
+            fontFamily={"serif"}
+            mb={2}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor aut
+            eos exercitationem nobis neque pariatur velit quas molestiae eaque
+            est?
+          </Text>
+
+          {/* <Image
+            width={1}
+            height={250}
+            src="https://maps.googleapis.com/maps/api/staticmap?center=&zoom=13&scale=1&size=400x250&maptype=roadmap&key=AIzaSyDN46Q5BVfXgArF54AqYuwzTbrjhtXJGb8&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7CPosto+Faleiros"
+          /> */}
+        </Section>
+
+        <Section title="Segurança">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, itaque.
+        </Section>
+
+        <Section title={`Participantes (${lobby.interested.length})`}>
+          <Box>
+            {lobby.interested.map(user => (
+              <Avatar key={user.email} user={user} />
+            ))}
+          </Box>
+        </Section>
+      </Box>
+    </BasePage>
+  );
+}
+
+export default inject("lobbyStore")(observer(Lobbies));

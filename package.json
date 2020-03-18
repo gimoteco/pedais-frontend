@@ -10,16 +10,30 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "apollo-boost": "^0.4.7",
+    "aws-amplify": "^2.2.6",
+    "date-fns": "^2.11.0",
+    "dotenv": "^8.2.0",
+    "emotion-theming": "^10.0.27",
+    "graphql": "^14.6.0",
+    "graphql.macro": "^1.4.2",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-feather": "^2.0.3",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "rebass": "^4.0.7",
+    "tinycolor2": "^1.4.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn run-graphql-server\" \"yarn react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "run-graphql-server": "graphql-faker schema.faker.graphql"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +49,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.3",
+    "@types/rebass": "^4.0.4",
+    "concurrently": "^5.1.0",
+    "graphql-faker": "^2.0.0-rc.17"
   }
 }
