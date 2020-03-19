@@ -3,24 +3,22 @@ import { ThemeProvider } from "emotion-theming";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { theme } from "./theme";
 import { Provider as StoreProvider } from "mobx-react";
-import lobbiesStore from "./stores/lobbiesStore";
-import lobbyStore from "./stores/lobbyStore";
-import authStore from "./stores/authStore";
-import Lobbies from "./screens/Lobbies";
-import Lobby from "./screens/Lobby";
+import { routes } from "./configuration/routes";
+import stores from "./stores";
 
 function App() {
   return (
-    <Router>
-      <StoreProvider {...{ lobbiesStore, lobbyStore, authStore }}>
-        <ThemeProvider theme={theme}>
+    <StoreProvider {...stores}>
+      <ThemeProvider theme={theme}>
+        <Router>
           <Switch>
-            <Route path={"/"} exact component={Lobbies} />
-            <Route path={"/lobby/:id"} component={Lobby} />
+            {Object.values(routes).map((route: any) => (
+              <Route key={route.path} {...route} />
+            ))}
           </Switch>
-        </ThemeProvider>
-      </StoreProvider>
-    </Router>
+        </Router>
+      </ThemeProvider>
+    </StoreProvider>
   );
 }
 

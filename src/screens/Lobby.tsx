@@ -3,12 +3,15 @@ import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import { BasePage } from "../domains/layout/BasePage";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
-import { Box, Text, Flex } from "rebass";
+import { Box, Text } from "rebass";
 import { UserPlus, Share2, User } from "react-feather";
 import { IconButton } from "../sharedComponents/IconButton";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
+import { Interesteds } from "../domains/lobby/Interesteds";
 
-function Section({ title, children }) {
+function Section({ title, children, showIf = true }) {
+  if (!showIf) return null;
+
   return (
     <Box
       mb={3}
@@ -56,7 +59,7 @@ function AvatarPlaceholder({ sx }) {
 
 const AVATAR_SIZE = 40;
 
-function Avatar({ user }) {
+export function Avatar({ user }) {
   return (
     <ImageWithPlaceholder
       url={user.avatarUrl}
@@ -81,7 +84,7 @@ function Lobbies({ lobbyStore }) {
 
   useEffect(() => {
     lobbyStore.fetchLobby(id);
-  }, []);
+  }, [id, lobbyStore]);
 
   if (!lobby) {
     return null;
@@ -124,12 +127,11 @@ function Lobbies({ lobbyStore }) {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, itaque.
         </Section>
 
-        <Section title={`Participantes (${lobby.interested.length})`}>
-          <Flex flexWrap="wrap" justifyContent="space-between">
-            {lobby.interested.map(user => (
-              <Avatar key={user.email} user={user} />
-            ))}
-          </Flex>
+        <Section
+          showIf={lobby.interested.length > 0}
+          title={`Participantes (${lobby.interested.length})`}
+        >
+          <Interesteds interesteds={lobby.interested} />
         </Section>
       </Box>
     </BasePage>

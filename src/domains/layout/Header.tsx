@@ -1,9 +1,9 @@
 import React from "react";
-import { Flex, Image, Box } from "rebass";
-import logo from "./Logo.svg";
+import { Flex, Box } from "rebass";
 import { Menu, ChevronLeft } from "react-feather";
 import { useHistory } from "react-router-dom";
-import { routes, HOME_ROUTE } from "../../configuration/routes";
+import { routes } from "../../configuration/routes";
+import { Logo } from "./Logo";
 
 export const Header = () => {
   const history = useHistory();
@@ -11,10 +11,6 @@ export const Header = () => {
 
   function back() {
     history.goBack();
-  }
-
-  function goHome() {
-    history.push(HOME_ROUTE.path);
   }
 
   return (
@@ -34,7 +30,7 @@ export const Header = () => {
         {canGoBack && <ChevronLeft onClick={back} size={36} />}
       </Box>
 
-      <Image onClick={goHome} width="45%" src={logo} />
+      <Logo width="45%" />
     </Flex>
   );
 };

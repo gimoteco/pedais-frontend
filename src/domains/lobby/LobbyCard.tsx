@@ -1,56 +1,10 @@
 import React from "react";
 import { Box, Heading, Text, Flex } from "rebass";
-import { useTheme } from "emotion-theming";
 import { formatDateTime } from "../../utils/date";
-import { Image as ImageIcon, Users, Map, ArrowUpRight } from "react-feather";
-import { rgba } from "../../utils/color";
+import { Users, Map, ArrowUpRight } from "react-feather";
 import { ImageWithPlaceholder } from "./ImageWithPlaceholder";
-
-const Gradient = ({ children, ...props }) => {
-  const theme: any = useTheme();
-  return (
-    <Flex
-      justifyContent={"space-between"}
-      bg={rgba(theme.colors.black, 0.4)}
-      {...props}
-    >
-      {children}
-    </Flex>
-  );
-};
-
-export const IMAGE_HEIGHT = 300;
-
-export const ImagePlaceholder = ({ sx }) => (
-  <Flex
-    bg="gray"
-    height={IMAGE_HEIGHT}
-    alignItems="center"
-    justifyContent="center"
-    color="white"
-  >
-    <ImageIcon size={80} />
-  </Flex>
-);
-
-function IconnedInformation({ info, Icon, tip }) {
-  return (
-    <Flex
-      color="white"
-      alignItems="center"
-      sx={{
-        "&:not(:last-child)": {
-          mr: 3
-        }
-      }}
-    >
-      <Icon alt={tip} size={24} />
-      <Text variant="value" ml={1}>
-        {info}
-      </Text>
-    </Flex>
-  );
-}
+import { IconnedInformation } from "./IconnedInformation";
+import { Gradient } from "./Gradient";
 
 export function LobbyInformation({ lobby }) {
   return (
@@ -59,7 +13,7 @@ export function LobbyInformation({ lobby }) {
         position: "relative"
       }}
     >
-      <ImageWithPlaceholder url={lobby.imageUrl} />
+      <ImageWithPlaceholder width={1} height={300} url={lobby.imageUrl} />
 
       <Gradient
         width={1}

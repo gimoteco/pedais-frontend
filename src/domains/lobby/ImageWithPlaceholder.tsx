@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Image } from "rebass";
-import { ImagePlaceholder } from "./LobbyCard";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 export const ImageWithPlaceholder = ({
   url,

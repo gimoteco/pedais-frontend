@@ -19,5 +19,40 @@ export const theme = {
       whiteSpace: "nowrap",
       fontSize: 2
     }
+  },
+  buttons: {
+    transparent: {
+      borderColor: "white",
+      borderWidth: 1,
+      borderStyle: "solid",
+      bg: "transparent",
+      width: "100%",
+      fontFamily: "body",
+      fontWeight: "bold",
+      textTransform: "uppercase"
+    }
+  },
+  forms: {
+    label: {
+      color: "white",
+      fontFamily: "heading",
+      fontSize: 1,
+      fontWeight: "bold",
+      textTransform: "uppercase"
+    },
+    input: {
+      color: "white",
+      border: "none",
+      borderRadius: 0,
+      borderBottomWidth: 1,
+      fontFamily: "body",
+      borderBottomStyle: "solid",
+      borderBottomColor: "white",
+      padding: 1,
+      "&::placeholder": {
+        color: "white",
+        opacity: 0.8
+      }
+    }
   }
 };
