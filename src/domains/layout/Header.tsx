@@ -13,23 +13,25 @@ export const Header = () => {
   }
 
   return (
-    <Flex
-      color={"white"}
-      padding={3}
-      justifyContent="center"
-      alignItems="center"
-      bg="primary"
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          left: 0
-        }}
+    <Box>
+      <Flex
+        color={"white"}
+        padding={3}
+        justifyContent="center"
+        alignItems="center"
+        bg="primary"
       >
-        {canGoBack && <ChevronLeft onClick={back} size={36} />}
-      </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            left: 0
+          }}
+        >
+          {canGoBack && <ChevronLeft onClick={back} size={36} />}
+        </Box>
 
-      <Logo width="45%" />
-    </Flex>
+        <Logo width="45%" />
+      </Flex>
+    </Box>
   );
 };

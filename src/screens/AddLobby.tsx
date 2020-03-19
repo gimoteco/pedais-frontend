@@ -1,9 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { BasePage } from "../domains/layout/BasePage";
-import { Box, Heading, Button } from "rebass";
+import { Box, Heading } from "rebass";
 import { Input, Textarea } from "@rebass/forms";
 import { Field } from "../sharedComponents/Field";
+import { IconButton } from "../sharedComponents/IconButton";
+import { Save } from "react-feather";
 
 function AddLobby() {
   return (
@@ -36,7 +38,9 @@ function AddLobby() {
           />
         </Box>
 
-        <Button>Salvar</Button>
+        <IconButton Icon={Save} variant="secondary">
+          Salvar
+        </IconButton>
       </Box>
     </BasePage>
   );

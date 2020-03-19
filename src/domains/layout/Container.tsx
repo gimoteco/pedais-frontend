@@ -1,8 +1,8 @@
 import React from "react";
-import { Box } from "rebass";
+import { Box, Flex } from "rebass";
 
 export const Container = ({ children }) => (
-  <Box height={"100%"} width={1} bg="white">
+  <Flex flexDirection="column" height={"100%"} bg="white">
     {children}
-  </Box>
+  </Flex>
 );

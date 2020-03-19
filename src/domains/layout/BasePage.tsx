@@ -2,10 +2,24 @@ import React from "react";
 import { Container } from "./Container";
 import { Header } from "./Header";
 import { ContentContainer } from "./ContentContainer";
+import { Flex } from "rebass";
+import { RotatingLoadingIndicator } from "./RotatingLoadingIndicator";
 
-export const BasePage = ({ children, noPadding = false }) => (
+function LoadingIndicator({ isLoading }) {
+  if (!isLoading) return null;
+
+  return (
+    <Flex height={"100%"} alignItems="center" justifyContent="center">
+      <RotatingLoadingIndicator />
+    </Flex>
+  );
+}
+
+export const BasePage = ({ children, loading = false, noPadding = false }) => (
   <Container>
     <Header />
-    <ContentContainer noPadding={noPadding}>{children}</ContentContainer>
+    <ContentContainer noPadding={noPadding}>
+      {loading ? <LoadingIndicator isLoading={loading} /> : children}
+    </ContentContainer>
   </Container>
 );
