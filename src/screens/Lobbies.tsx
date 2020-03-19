@@ -14,9 +14,13 @@ function Lobbies({ lobbiesStore }) {
     history.push(`/lobby/${lobby.id}`);
   }
 
+  function goToAddLobby() {
+    history.push(`/lobby/add`);
+  }
+
   return (
     <BasePage>
-      <IconButton mb={2} Icon={PlusCircle}>
+      <IconButton onClick={goToAddLobby} mb={2} Icon={PlusCircle}>
         Criar pedal
       </IconButton>
 

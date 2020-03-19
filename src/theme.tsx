@@ -1,3 +1,26 @@
+const defaultInputStyle = {
+  color: "text",
+  border: "none",
+  borderRadius: 0,
+  borderBottomWidth: 1,
+  fontFamily: "body",
+  borderBottomStyle: "solid",
+  borderBottomColor: "text",
+  padding: 1,
+  "&::placeholder": {
+    color: "text",
+    opacity: 0.8
+  }
+};
+
+const defaultLabelStyle = {
+  color: "text",
+  fontFamily: "heading",
+  fontSize: 1,
+  fontWeight: "bold",
+  textTransform: "uppercase"
+};
+
 export const theme = {
   colors: {
     primary: "#EA3A3A",
@@ -21,6 +44,22 @@ export const theme = {
     }
   },
   buttons: {
+    secondary: {
+      width: "100%",
+      fontWeight: "bold",
+      padding: 3,
+      bg: "secondary",
+      color: "white",
+      fontSize: 3,
+      svg: {
+        marginRight: 2
+      },
+      textTransform: "uppercase",
+      fontFamily: "body",
+      "&:not(:last-child)": {
+        marginBottom: 2
+      }
+    },
     transparent: {
       borderColor: "white",
       borderWidth: 1,
@@ -34,24 +73,42 @@ export const theme = {
   },
   forms: {
     label: {
-      color: "white",
-      fontFamily: "heading",
-      fontSize: 1,
-      fontWeight: "bold",
-      textTransform: "uppercase"
+      ...defaultLabelStyle,
+      login: {
+        ...defaultLabelStyle,
+        color: "white"
+      }
     },
-    input: {
-      color: "white",
+    unit: {
+      color: "text",
+      fontFamily: "body",
+      fontWeight: "bold"
+    },
+    textarea: {
+      color: "text",
+      fontFamily: "body",
+      height: "5em",
       border: "none",
       borderRadius: 0,
       borderBottomWidth: 1,
-      fontFamily: "body",
       borderBottomStyle: "solid",
-      borderBottomColor: "white",
+      borderBottomColor: "text",
       padding: 1,
       "&::placeholder": {
-        color: "white",
+        color: "text",
         opacity: 0.8
+      }
+    },
+    input: {
+      ...defaultInputStyle,
+      login: {
+        ...defaultInputStyle,
+        color: "white",
+        borderBottomColor: "white",
+        "&::placeholder": {
+          ...defaultInputStyle["&::placeholder"],
+          color: "white"
+        }
       }
     }
   }

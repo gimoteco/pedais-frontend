@@ -1,6 +1,5 @@
 import { action, observable } from "mobx";
 import { apolloClient } from "../configuration/graphql";
-import { gql } from "apollo-boost";
 import { Lobby } from "./types";
 import { loader } from "graphql.macro";
 

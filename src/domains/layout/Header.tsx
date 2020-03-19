@@ -1,8 +1,7 @@
 import React from "react";
 import { Flex, Box } from "rebass";
-import { Menu, ChevronLeft } from "react-feather";
+import { ChevronLeft } from "react-feather";
 import { useHistory } from "react-router-dom";
-import { routes } from "../../configuration/routes";
 import { Logo } from "./Logo";
 
 export const Header = () => {
