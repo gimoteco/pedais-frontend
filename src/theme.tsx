@@ -21,6 +21,18 @@ const defaultLabelStyle = {
   textTransform: "uppercase"
 };
 
+const defaultButton = {
+  width: "100%",
+  fontFamily: "body",
+  fontWeight: "bold",
+  textTransform: "uppercase",
+  padding: 3,
+  fontSize: 3,
+  svg: {
+    marginRight: 2
+  }
+};
+
 export const theme = {
   colors: {
     primary: "#EA3A3A",
@@ -44,31 +56,24 @@ export const theme = {
     }
   },
   buttons: {
+    primary: {
+      ...defaultButton
+    },
     secondary: {
-      width: "100%",
-      fontWeight: "bold",
-      padding: 3,
+      ...defaultButton,
       bg: "secondary",
       color: "white",
-      fontSize: 3,
-      svg: {
-        marginRight: 2
-      },
-      textTransform: "uppercase",
-      fontFamily: "body",
+
       "&:not(:last-child)": {
         marginBottom: 2
       }
     },
     transparent: {
+      ...defaultButton,
       borderColor: "white",
       borderWidth: 1,
       borderStyle: "solid",
-      bg: "transparent",
-      width: "100%",
-      fontFamily: "body",
-      fontWeight: "bold",
-      textTransform: "uppercase"
+      bg: "transparent"
     }
   },
   forms: {

@@ -20,7 +20,8 @@ export default function Login() {
 
         <Box width={1} mt={3} mb={2}>
           <Field
-            name={"Email"}
+            label="Email"
+            name="email"
             variant="login"
             input={
               <Input type="email" name="email" placeholder="seu@email.com.br" />
@@ -30,7 +31,8 @@ export default function Login() {
 
         <Box width={1} mb={2}>
           <Field
-            name={"Senha"}
+            name="password"
+            label="Senha"
             variant="login"
             input={
               <Input type="password" name="password" placeholder="senha" />

@@ -6,7 +6,6 @@ export const ImageWithPlaceholder = ({
   url,
   Placeholder = ImagePlaceholder,
   notLoadingDisplay = "block",
-  className = undefined,
   ...imageProps
 }: any) => {
   const [loading, setLoading] = useState(true);
@@ -14,10 +13,10 @@ export const ImageWithPlaceholder = ({
     <>
       {url && (
         <Image
-          className={className}
           src={url}
           {...imageProps}
           sx={{
+            objectFit: "cover",
             display: loading ? "none" : notLoadingDisplay,
             ...imageProps.sx
           }}
