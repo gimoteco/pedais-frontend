@@ -1,3 +1,4 @@
+import React from "react";
 import ListLobbiesScreen from "../screens/Lobbies";
 import LobbyScreen from "../screens/Lobby";
 import Login from "../screens/Login";
@@ -9,7 +10,12 @@ export const routes = {
     exact: true,
     component: ListLobbiesScreen
   },
-  addLobby: { path: "/lobby/add", exact: true, component: AddLobby },
+  addLobby: {
+    path: "/lobby/add",
+    exact: true,
+    component: AddLobby,
+    private: true
+  },
   lobby: { path: "/lobby/:id", exact: true, component: LobbyScreen },
   login: { path: "/login", component: Login }
 };

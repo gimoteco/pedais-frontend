@@ -48,6 +48,9 @@ export const theme = {
     serif: "'Source Sans Serif', serif"
   },
   text: {
+    heading: {
+      textTransform: "uppercase"
+    },
     value: {
       fontWeight: "bold",
       fontFamily: "heading",

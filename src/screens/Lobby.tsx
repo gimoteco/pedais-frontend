@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import { BasePage } from "../domains/layout/BasePage";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
-import { Box, Text } from "rebass";
+import { Box, Text, Image } from "rebass";
 import { UserPlus, Share2, User } from "react-feather";
 import { IconButton } from "../sharedComponents/IconButton";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
@@ -17,11 +17,11 @@ function Section({ title, children, showIf = true }) {
       mb={3}
       sx={{
         textTransform: "uppercase",
-        fontFamily: "serif"
+        fontFamily: "body"
       }}
     >
       <Text
-        fontFamily="heading"
+        fontFamily="body"
         fontSize={3}
         fontWeight="bold"
         mb={2}
@@ -108,7 +108,7 @@ function Lobbies({ lobbyStore }) {
             sx={{
               textTransform: "uppercase"
             }}
-            fontFamily={"serif"}
+            fontFamily={"body"}
             mb={2}
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor aut
@@ -116,11 +116,11 @@ function Lobbies({ lobbyStore }) {
             est?
           </Text>
 
-          {/* <Image
+          <Image
             width={1}
             height={250}
             src="https://maps.googleapis.com/maps/api/staticmap?center=&zoom=13&scale=1&size=400x250&maptype=roadmap&key=AIzaSyDN46Q5BVfXgArF54AqYuwzTbrjhtXJGb8&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7CPosto+Faleiros"
-          /> */}
+          />
         </Section>
 
         <Section title="Segurança">

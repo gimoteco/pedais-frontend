@@ -6,7 +6,7 @@ export function Interesteds({ interesteds }) {
   return (
     <Flex flexWrap="wrap">
       {interesteds.map(user => (
-        <Avatar key={user.email} user={user} />
+        <Avatar key={user.id} user={user} />
       ))}
     </Flex>
   );
