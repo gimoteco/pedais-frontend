@@ -1,7 +1,18 @@
-#import "../fragments/lobby.graphql"
-
-query lobby($id: ID!) {
-  lobby(id: $id) {
-    ...Lobby
+query lobby($id: String!) {
+  party(id: $id) {
+    id
+    name
+    distance
+    imageUrl
+    date
+    elevationGain
+    group {
+      name
+    }
+    interested {
+      id
+      email
+      avatarUrl
+    }
   }
 }

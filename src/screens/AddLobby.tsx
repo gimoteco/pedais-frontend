@@ -10,6 +10,7 @@ import { Form } from "react-final-form";
 import { format } from "date-fns";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { IMAGE_HEIGHT } from "../domains/lobby/ImagePlaceholder";
+import { generateUploadUrl } from "../stores/lobbiesStore";
 
 interface ImagePreviewProps extends ImageProps {
   image?: File;
@@ -39,13 +40,36 @@ const initialValues = {
   date: format(new Date(), "yyyy-MM-dd")
 };
 
+function uploadFile(file, signedRequest) {
+  const options = {
+    method: 'PUT',
+    body: file
+  };
+  return fetch(signedRequest, options)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`${response.status}: ${response.statusText}`);
+      }
+    });
+}
+
+async function uploadFileAsset(file: File) {
+  const url = await generateUploadUrl(file.name)
+  await uploadFile(file, url)
+}
+
 function AddLobby() {
   const imageInputRef = React.useRef<HTMLInputElement | null>(null);
+
+  async function onSubmit(values) {
+    uploadFileAsset(values["cover-image"][0])
+  }
+
   return (
     <BasePage>
       <Heading mb={3}>Adicionar pedal</Heading>
 
-      <Form onSubmit={console.log} initialValues={initialValues}>
+      <Form onSubmit={onSubmit} initialValues={initialValues}>
         {({ handleSubmit, values }) => (
           <Box as="form" onSubmit={handleSubmit}>
             <Box mb={3}>
@@ -119,4 +143,4 @@ function AddLobby() {
   );
 }
 
-export default inject("lobbiesStore")(observer(AddLobby));
+export default AddLobby;

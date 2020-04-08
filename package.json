@@ -41,6 +41,10 @@
     "eject": "react-scripts eject",
     "run-graphql-server": "graphql-faker schema.faker.graphql"
   },
+  "gqless": {
+    "url": "http://example.com/graphql",
+    "outputDir": "src/graphql"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },

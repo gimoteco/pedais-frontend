@@ -48,8 +48,8 @@ export class LobbyStore {
         id
       }
     });
-    this.lobby = result.data.lobby;
-    this.interested = result.data.lobby.interested;
+    this.lobby = result.data.party;
+    this.interested = result.data.party.interested;
   };
 
   @computed get currentUserIsInterested() {

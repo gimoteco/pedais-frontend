@@ -1,7 +1,18 @@
-#import "../fragments/lobby.graphql"
-
 query getLobbies {
-  lobbies {
-    ...Lobby
+  parties {
+    id
+    name
+    distance
+    imageUrl
+    date
+    elevationGain
+    group {
+      name
+    }
+    interested {
+      id
+      email
+      avatarUrl
+    }
   }
 }

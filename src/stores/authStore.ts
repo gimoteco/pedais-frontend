@@ -11,9 +11,11 @@ export class AuthStore {
       switch (event) {
         case "signIn":
           const user = await Auth.currentAuthenticatedUser();
+          console.log(user)
           this.currentUser = {
             id: user.attributes.sub,
-            email: user.attributes.email
+            email: user.attributes.email,
+            token: user.signInUserSession.accessToken
           } as any;
           this.loadingUser = false;
 
@@ -27,9 +29,11 @@ export class AuthStore {
   loadCurrentUser = async () => {
     await Auth.currentAuthenticatedUser().then(user => {
       if (user) {
+        console.log(user)
         this.currentUser = {
           id: user.attributes.sub,
-          email: user.attributes.email
+          email: user.attributes.email,
+          token: user.signInUserSession.accessToken
         } as any;
       }
       this.loadingUser = false;
@@ -55,6 +59,10 @@ export class AuthStore {
 
   @computed get isLogged() {
     return this.currentUser != null;
+  }
+
+  @computed get token() {
+    return this.currentUser ? this.currentUser.token : null;
   }
 }
 

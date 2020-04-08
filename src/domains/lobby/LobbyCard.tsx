@@ -51,7 +51,7 @@ export function LobbyInformation({ lobby }) {
           </Heading>
 
           <Text fontWeight="bold" fontFamily="body" color={"white"}>
-            {formatDateTime(new Date(parseInt(lobby.date)))}
+            {formatDateTime(new Date(lobby.date))}
           </Text>
 
           {lobby.group !== null && (
