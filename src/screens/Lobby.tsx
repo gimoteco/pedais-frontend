@@ -73,12 +73,14 @@ export function Avatar({ user }) {
       width={AVATAR_SIZE}
       height={AVATAR_SIZE}
       Placeholder={AvatarPlaceholder}
+      alt={user.email}
+      title={user.email}
       notLoadingDisplay="inline-block"
     />
   );
 }
 
-function Lobbies({ lobbyStore }) {
+function Lobby({ lobbyStore }) {
   const { id } = useParams();
   const { lobby } = lobbyStore;
 
@@ -95,7 +97,7 @@ function Lobbies({ lobbyStore }) {
       <LobbyInformation lobby={lobby} />
 
       <Box padding={2}>
-        <IconButton Icon={UserPlus}>Participar</IconButton>
+        <IconButton Icon={UserPlus} onClick={() => lobbyStore.markAsInterested(id)}>Participar</IconButton>
 
         <IconButton bg="positive" Icon={Share2}>
           Compartilhar
@@ -138,4 +140,4 @@ function Lobbies({ lobbyStore }) {
   );
 }
 
-export default inject("lobbyStore")(observer(Lobbies));
+export default inject("lobbyStore")(observer(Lobby));

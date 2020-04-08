@@ -1,0 +1,5 @@
+mutation createLobby($input: AddPartyInput!) {
+  createParty(input: $input) {
+    id
+  }
+}

@@ -3,7 +3,7 @@ query getLobbies {
     id
     name
     distance
-    imageUrl
+    coverImageUrl
     date
     elevationGain
     group {

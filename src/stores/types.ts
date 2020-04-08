@@ -12,6 +12,5 @@ export interface Lobby {
     name: string;
   };
   distance: number;
-  imageUrl?: string;
   interested: User[];
 }

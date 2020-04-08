@@ -4,7 +4,7 @@ import { Lobby } from "./types";
 import { loader } from "graphql.macro";
 
 const getLobbies = loader("./queries/getLobbies.graphql");
-const getUploadUrl = loader("./queries/getUploadUrl.graphql");
+
 
 export class LobbiesStore {
   @observable lobbies: Lobby[] = [];
@@ -21,12 +21,5 @@ export class LobbiesStore {
     this.lobbies = result.data.parties;
   };
 }
-
-export async function generateUploadUrl(filename): Promise<string> {
-  return (await apolloClient.query({
-    query: getUploadUrl,
-    variables: { filename }
-  })).data.uploadUrl;
-};
 
 export default new LobbiesStore();

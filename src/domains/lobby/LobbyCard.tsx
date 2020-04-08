@@ -13,7 +13,7 @@ export function LobbyInformation({ lobby }) {
         position: "relative"
       }}
     >
-      <ImageWithPlaceholder width={1} height={300} url={lobby.imageUrl} />
+      <ImageWithPlaceholder width={1} height={300} url={lobby.coverImageUrl} />
 
       <Gradient
         width={1}

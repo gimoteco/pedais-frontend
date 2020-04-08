@@ -3,7 +3,7 @@ query lobby($id: String!) {
     id
     name
     distance
-    imageUrl
+    coverImageUrl
     date
     elevationGain
     group {

@@ -1,5 +1,4 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
 import { BasePage } from "../domains/layout/BasePage";
 import { Box, Heading, Button, ImageProps } from "rebass";
 import { Input, Textarea } from "@rebass/forms";
@@ -7,10 +6,11 @@ import { Field } from "../sharedComponents/Field";
 import { IconButton } from "../sharedComponents/IconButton";
 import { Save } from "react-feather";
 import { Form } from "react-final-form";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { IMAGE_HEIGHT } from "../domains/lobby/ImagePlaceholder";
-import { generateUploadUrl } from "../stores/lobbiesStore";
+import { uploadFileAsset } from "../utils/asset";
+import { observer, inject } from "mobx-react";
 
 interface ImagePreviewProps extends ImageProps {
   image?: File;
@@ -40,29 +40,23 @@ const initialValues = {
   date: format(new Date(), "yyyy-MM-dd")
 };
 
-function uploadFile(file, signedRequest) {
-  const options = {
-    method: 'PUT',
-    body: file
-  };
-  return fetch(signedRequest, options)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`${response.status}: ${response.statusText}`);
-      }
-    });
-}
 
-async function uploadFileAsset(file: File) {
-  const url = await generateUploadUrl(file.name)
-  await uploadFile(file, url)
-}
-
-function AddLobby() {
+function AddLobby({ addLobbyStore }) {
   const imageInputRef = React.useRef<HTMLInputElement | null>(null);
 
   async function onSubmit(values) {
-    uploadFileAsset(values["cover-image"][0])
+    let newFilename
+
+    if (values["cover-image"][0])
+      newFilename = await uploadFileAsset(values["cover-image"][0])
+
+    addLobbyStore.add({
+      name: values.title,
+      date: parse(`${values.date} ${values.hour}`, 'yyyy-MM-dd HH:mm', new Date()),
+      coverImage: newFilename,
+      elevationGain: parseFloat(values['elevation-gain']),
+      distance: parseFloat(values.distance),
+    })
   }
 
   return (
@@ -143,4 +137,5 @@ function AddLobby() {
   );
 }
 
-export default AddLobby;
+export default inject("addLobbyStore")(observer(AddLobby));
+

@@ -19,10 +19,8 @@ export class LobbyStore {
   @action markAsInterested = async (id: string) => {
     const result = await apolloClient.mutate({
       mutation: gql`
-        mutation markAsInterested($id: ID!) {
-          lobby(id: $id) {
-            markAsInterested
-          }
+        mutation markAsInterested($id: String!) {
+          markAsInterested(id: $id) 
         }
       `,
       variables: {
