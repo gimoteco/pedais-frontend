@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { BasePage } from "../domains/layout/BasePage";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
 import { Box, Text, Image } from "rebass";
-import { UserPlus, Share2, User } from "react-feather";
+import { UserPlus, UserMinus, Share2, User } from "react-feather";
 import { IconButton } from "../sharedComponents/IconButton";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { Interesteds } from "../domains/lobby/Interesteds";
@@ -82,7 +82,7 @@ export function Avatar({ user }) {
 
 function Lobby({ lobbyStore }) {
   const { id } = useParams();
-  const { lobby } = lobbyStore;
+  const { lobby, currentUserIsInterested, interested } = lobbyStore;
 
   useEffect(() => {
     lobbyStore.fetchLobby(id);
@@ -97,7 +97,14 @@ function Lobby({ lobbyStore }) {
       <LobbyInformation lobby={lobby} />
 
       <Box padding={2}>
-        <IconButton Icon={UserPlus} onClick={() => lobbyStore.markAsInterested(id)}>Participar</IconButton>
+        <IconButton
+          disabled={currentUserIsInterested}
+          Icon={currentUserIsInterested ? UserMinus : UserPlus}
+          onClick={() => lobbyStore.markAsInterested(id)}>
+          {
+            lobbyStore.currentUserIsInterested ? 'Deixar de participar' : 'Participar'
+          }
+        </IconButton>
 
         <IconButton bg="positive" Icon={Share2}>
           Compartilhar
@@ -130,10 +137,10 @@ function Lobby({ lobbyStore }) {
         </Section>
 
         <Section
-          showIf={lobby.interested.length > 0}
+          showIf={interested.length > 0}
           title={`Participantes (${lobby.interested.length})`}
         >
-          <Interesteds interesteds={lobby.interested} />
+          <Interesteds interesteds={interested} />
         </Section>
       </Box>
     </BasePage>

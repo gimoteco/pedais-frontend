@@ -31,7 +31,7 @@ export class LobbyStore {
     this.interested = [
       {
         id: currentUser.id,
-        name: currentUser.name,
+        email: currentUser.email,
         avatarUrl: currentUser.avatarUrl
       },
       ...this.interested
