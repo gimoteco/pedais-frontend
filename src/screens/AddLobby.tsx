@@ -12,16 +12,11 @@ import { IMAGE_HEIGHT } from "../domains/lobby/ImagePlaceholder";
 import { uploadFileAsset } from "../utils/asset";
 import { observer, inject } from "mobx-react";
 
-interface ImagePreviewProps extends ImageProps {
-  image?: File;
-  onClick(): void;
-}
-
 const ImagePreview = ({
   image = undefined,
   onClick,
   ...otherProps
-}: ImagePreviewProps) => {
+}: any) => {
   const imageUrl = image && URL.createObjectURL(image);
 
   return (
