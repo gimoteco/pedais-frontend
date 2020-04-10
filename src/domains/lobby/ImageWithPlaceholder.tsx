@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Image } from "rebass";
 import { ImagePlaceholder } from "./ImagePlaceholder";
+import { getOptimizedImage } from "../../utils/image";
 
 export const ImageWithPlaceholder = ({
   url,
@@ -13,7 +14,7 @@ export const ImageWithPlaceholder = ({
     <>
       {url && (
         <Image
-          src={url}
+          src={getOptimizedImage(url)}
           {...imageProps}
           sx={{
             objectFit: "cover",
