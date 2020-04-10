@@ -17,11 +17,11 @@ export class LobbyStore {
     this.authStore = authStore;
   }
 
-  @task.resolved markAsInterested = async (id: string) => {
+  @task.resolved toggleInterest = async (id: string) => {
     const result = await apolloClient.mutate({
       mutation: gql`
-        mutation markAsInterested($id: String!) {
-          markAsInterested(id: $id) 
+        mutation toggleInterest($id: String!) {
+          toggleInterest(id: $id) 
         }
       `,
       variables: {

@@ -98,10 +98,9 @@ function Lobby({ lobbyStore }) {
 
       <Box padding={2}>
         <IconButton
-          disabled={currentUserIsInterested}
           Icon={currentUserIsInterested ? UserMinus : UserPlus}
-          loading={lobbyStore.markAsInterested.pending}
-          onClick={() => lobbyStore.markAsInterested(id)}>
+          loading={lobbyStore.toggleInterest.pending}
+          onClick={() => lobbyStore.toggleInterest(id)}>
           {
             lobbyStore.currentUserIsInterested ? 'Deixar de participar' : 'Participar'
           }
@@ -139,7 +138,7 @@ function Lobby({ lobbyStore }) {
 
         <Section
           showIf={interested.length > 0}
-          title={`Participantes (${lobby.interested.length})`}
+          title={`Participantes (${interested.length})`}
         >
           <Interesteds interesteds={interested} />
         </Section>

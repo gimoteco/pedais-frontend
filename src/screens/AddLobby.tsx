@@ -10,6 +10,7 @@ import { format, parse } from "date-fns";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { IMAGE_HEIGHT } from "../domains/lobby/ImagePlaceholder";
 import { observer, inject } from "mobx-react";
+import { PlacesAutocomplete } from "../sharedComponents/PlacesAutocomplete";
 
 const ImagePreview = ({
   image = undefined,
@@ -39,6 +40,7 @@ function AddLobby({ addLobbyStore }) {
   const imageInputRef = React.useRef<HTMLInputElement | null>(null);
   const { add: { pending: loading } } = addLobbyStore
   async function onSubmit(values) {
+    console.log(values)
     addLobbyStore.add({
       name: values.title,
       date: parse(`${values.date} ${values.hour}`, 'yyyy-MM-dd HH:mm', new Date()),
@@ -82,6 +84,10 @@ function AddLobby({ addLobbyStore }) {
 
             <Box mb={3}>
               <Field label="Hora" name="hour" input={<Input type="time" />} />
+            </Box>
+
+            <Box mb={3}>
+              <Field label="Ponto de encontro" name="encounter-point" input={<PlacesAutocomplete />} />
             </Box>
 
             <Box mb={3}>
