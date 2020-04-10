@@ -1,25 +1,30 @@
-import { action, computed, observable } from "mobx";
 import { apolloClient } from "../configuration/graphql";
-import { gql } from "apollo-boost";
-import authStore, { AuthStore } from "./authStore";
 import { loader } from "graphql.macro";
+import { task } from "mobx-task";
+import { uploadFileAsset } from "../utils/asset";
+
 const addLobby = loader("./mutations/addLobby.graphql");
 
 interface AddLobbyArgs {
   name: string
   distance: string
   elevationGain: string
-  coverImage?: string
+  coverImage?: File
   date: Date
   group?: string
 }
 
 export class AddLobbyStore {
-  @action add = async (args: AddLobbyArgs) => {
+  @task.resolved add = async (args: AddLobbyArgs) => {
+    let newFilename
+
+    if (args.coverImage)
+      newFilename = await uploadFileAsset(args.coverImage)
+
     const result = await apolloClient.mutate({
       mutation: addLobby,
       variables: {
-        input: args
+        input: { ...args, coverImage: newFilename }
       }
     });
     return result?.data?.createParty;

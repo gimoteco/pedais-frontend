@@ -2,9 +2,9 @@ import { action, observable } from "mobx";
 import { apolloClient } from "../configuration/graphql";
 import { Lobby } from "./types";
 import { loader } from "graphql.macro";
+import { task } from 'mobx-task'
 
 const getLobbies = loader("./queries/getLobbies.graphql");
-
 
 export class LobbiesStore {
   @observable lobbies: Lobby[] = [];
@@ -14,7 +14,7 @@ export class LobbiesStore {
     this.fetchLobbies();
   }
 
-  @action fetchLobbies = async () => {
+  @task fetchLobbies = async () => {
     const result = await apolloClient.query({
       query: getLobbies
     });

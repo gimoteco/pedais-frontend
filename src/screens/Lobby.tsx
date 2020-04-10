@@ -82,7 +82,7 @@ export function Avatar({ user }) {
 
 function Lobby({ lobbyStore }) {
   const { id } = useParams();
-  const { lobby, currentUserIsInterested, interested } = lobbyStore;
+  const { lobby, currentUserIsInterested, interested, fetchLobby: { pending: loadingFetchLobby } } = lobbyStore;
 
   useEffect(() => {
     lobbyStore.fetchLobby(id);
@@ -93,13 +93,14 @@ function Lobby({ lobbyStore }) {
   }
 
   return (
-    <BasePage noPadding>
+    <BasePage noPadding loading={loadingFetchLobby}>
       <LobbyInformation lobby={lobby} />
 
       <Box padding={2}>
         <IconButton
           disabled={currentUserIsInterested}
           Icon={currentUserIsInterested ? UserMinus : UserPlus}
+          loading={lobbyStore.markAsInterested.pending}
           onClick={() => lobbyStore.markAsInterested(id)}>
           {
             lobbyStore.currentUserIsInterested ? 'Deixar de participar' : 'Participar'

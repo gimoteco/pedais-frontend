@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { IconButton } from "../sharedComponents/IconButton";
 
 function Lobbies({ lobbiesStore }) {
-  const { lobbies } = lobbiesStore;
+  const { lobbies, fetchLobbies: { pending: loading } } = lobbiesStore;
   const history = useHistory();
 
   function goToLobby(lobby) {
@@ -19,7 +19,7 @@ function Lobbies({ lobbiesStore }) {
   }
 
   return (
-    <BasePage>
+    <BasePage loading={loading}>
       <IconButton onClick={goToAddLobby} mb={2} Icon={PlusCircle}>
         Criar pedal
       </IconButton>

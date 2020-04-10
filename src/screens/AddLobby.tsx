@@ -9,7 +9,6 @@ import { Form } from "react-final-form";
 import { format, parse } from "date-fns";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { IMAGE_HEIGHT } from "../domains/lobby/ImagePlaceholder";
-import { uploadFileAsset } from "../utils/asset";
 import { observer, inject } from "mobx-react";
 
 const ImagePreview = ({
@@ -38,17 +37,12 @@ const initialValues = {
 
 function AddLobby({ addLobbyStore }) {
   const imageInputRef = React.useRef<HTMLInputElement | null>(null);
-
+  const { add: { pending: loading } } = addLobbyStore
   async function onSubmit(values) {
-    let newFilename
-
-    if (values["cover-image"][0])
-      newFilename = await uploadFileAsset(values["cover-image"][0])
-
     addLobbyStore.add({
       name: values.title,
       date: parse(`${values.date} ${values.hour}`, 'yyyy-MM-dd HH:mm', new Date()),
-      coverImage: newFilename,
+      coverImage: values["cover-image"][0],
       elevationGain: parseFloat(values['elevation-gain']),
       distance: parseFloat(values.distance),
     })
@@ -118,7 +112,7 @@ function AddLobby({ addLobbyStore }) {
               />
             </Box>
 
-            <IconButton Icon={Save} variant="secondary">
+            <IconButton loading={loading} Icon={Save} variant="secondary">
               Salvar
             </IconButton>
 

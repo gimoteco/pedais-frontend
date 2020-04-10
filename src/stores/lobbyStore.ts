@@ -1,22 +1,23 @@
-import { action, computed, observable } from "mobx";
+import { computed, observable } from "mobx";
 import { apolloClient } from "../configuration/graphql";
 import { gql } from "apollo-boost";
 import authStore, { AuthStore } from "./authStore";
 import { Lobby, User } from "./types";
 import { loader } from "graphql.macro";
+import { task } from "mobx-task";
 
 const getLobby = loader("./queries/getLobby.graphql");
 
 export class LobbyStore {
+  authStore: AuthStore;
   @observable lobby: Lobby | null = null;
   @observable interested: User[] = [];
-  authStore: AuthStore;
 
   constructor(authStore) {
     this.authStore = authStore;
   }
 
-  @action markAsInterested = async (id: string) => {
+  @task.resolved markAsInterested = async (id: string) => {
     const result = await apolloClient.mutate({
       mutation: gql`
         mutation markAsInterested($id: String!) {
@@ -39,7 +40,7 @@ export class LobbyStore {
     return result;
   };
 
-  @action fetchLobby = async (id: string) => {
+  @task fetchLobby = async (id: string) => {
     const result = await apolloClient.query({
       query: getLobby,
       variables: {

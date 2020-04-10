@@ -11,13 +11,13 @@ const Rotate = keyframes`
     transform:rotate(360deg);
   }
 `;
-export function RotatingLoadingIndicator() {
+export function RotatingLoadingIndicator({ width = 100 }) {
   return (
     <Image
       sx={{
         animation: `${Rotate} 1s linear infinite`
       }}
-      width={100}
+      width={width}
       src={pedivela}
     />
   );
