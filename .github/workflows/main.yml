@@ -24,7 +24,12 @@ jobs:
     - uses: actions/setup-node@v1.4.1
       with:
         node-version: 12.x
-    
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     # Runs a single command using the runners shell
     - name: Install deps
       run: npm install
