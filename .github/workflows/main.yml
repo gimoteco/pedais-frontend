@@ -40,7 +40,7 @@ jobs:
       uses: dswistowski/surge-sh-action@v1
       with:
         domain: 'pedais.surge.sh'
-        project: '.'
+        project: 'build'
         login: ${{ secrets.surge_login }}
         token: ${{ secrets.surge_token }}
       
