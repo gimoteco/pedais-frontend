@@ -32,6 +32,8 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Build project
       run: npm run build
+      env: 
+        REACT_APP_API_HOSTNAME: https://immense-taiga-57223.herokuapp.com/graphql
   
     - name: Prepare for surge
       run: cp ./build/index.html ./build/200.html
