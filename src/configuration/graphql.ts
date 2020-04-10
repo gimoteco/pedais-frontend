@@ -1,6 +1,4 @@
 import ApolloClient from "apollo-boost";
-import authStore from '../stores/authStore'
-import { MainRouter } from "../utils/MainRouter";
 import { Auth } from "aws-amplify";
 
 async function getToken() {

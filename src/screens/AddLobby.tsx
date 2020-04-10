@@ -1,6 +1,6 @@
 import React from "react";
 import { BasePage } from "../domains/layout/BasePage";
-import { Box, Heading, Button, ImageProps } from "rebass";
+import { Box, Heading, Button } from "rebass";
 import { Input, Textarea } from "@rebass/forms";
 import { Field } from "../sharedComponents/Field";
 import { IconButton } from "../sharedComponents/IconButton";

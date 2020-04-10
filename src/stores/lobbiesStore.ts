@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { observable } from "mobx";
 import { apolloClient } from "../configuration/graphql";
 import { Lobby } from "./types";
 import { loader } from "graphql.macro";

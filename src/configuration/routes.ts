@@ -1,4 +1,3 @@
-import React from "react";
 import ListLobbiesScreen from "../screens/Lobbies";
 import LobbyScreen from "../screens/Lobby";
 import Login from "../screens/Login";
