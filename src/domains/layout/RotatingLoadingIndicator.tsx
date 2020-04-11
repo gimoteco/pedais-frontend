@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Box } from "rebass";
+import { Box } from "rebass";
 import { ReactComponent as Pedivela } from "./pedivela.svg";
 import { keyframes } from "@emotion/core";
 
