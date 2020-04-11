@@ -1,6 +1,6 @@
 import React from "react";
-import { Image } from "rebass";
-import pedivela from "./pedivela.svg";
+import { Image, Box } from "rebass";
+import { ReactComponent as Pedivela } from "./pedivela.svg";
 import { keyframes } from "@emotion/core";
 
 const Rotate = keyframes`
@@ -11,14 +11,17 @@ const Rotate = keyframes`
     transform:rotate(360deg);
   }
 `;
-export function RotatingLoadingIndicator({ width = 100 }) {
+export function RotatingLoadingIndicator({ width = 100, color = 'white' }) {
   return (
-    <Image
+    <Box
       sx={{
-        animation: `${Rotate} 1s linear infinite`
+        svg: {
+          animation: `${Rotate} 1s linear infinite`,
+          'path': {
+            fill: color
+          }
+        }
       }}
-      width={width}
-      src={pedivela}
-    />
+    ><Pedivela width={width} height={width} /></Box>
   );
 }

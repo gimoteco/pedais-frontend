@@ -28,8 +28,12 @@ export class LobbyStore {
         id
       }
     });
+
+
     const currentUser = this.authStore.currentUser;
-    this.interested = [
+
+
+    this.interested = this.currentUserIsInterested ? this.interested.filter(i => i.id !== currentUser.id) : [
       {
         id: currentUser.id,
         email: currentUser.email,
