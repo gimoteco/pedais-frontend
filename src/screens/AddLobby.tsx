@@ -27,7 +27,6 @@ function AddLobby({ addLobbyStore, groupsStore }) {
   const goToLobby = useGoTo(routes.lobby)
 
   async function onSubmit(values) {
-    console.log(values)
     const { id } = await addLobbyStore.add({
       name: values.title,
       date: parse(`${values.date} ${values.hour}`, 'yyyy-MM-dd HH:mm', new Date()),

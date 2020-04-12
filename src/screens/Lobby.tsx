@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { BasePage } from "../domains/layout/BasePage";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
 import { Box, Text, Image } from "rebass";
@@ -8,6 +8,7 @@ import { UserPlus, UserMinus, Share2, User } from "react-feather";
 import { IconButton } from "../sharedComponents/IconButton";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { Interesteds } from "../domains/lobby/Interesteds";
+import { WhatsappShareButton } from 'react-share'
 
 function Section({ title, children, showIf = true }) {
   if (!showIf) return null;
@@ -83,14 +84,14 @@ export function Avatar({ user }) {
 function Lobby({ lobbyStore }) {
   const { id } = useParams();
   const { lobby, currentUserIsInterested, interested, fetchLobby: { pending: loadingFetchLobby } } = lobbyStore;
-
+  const location = window.location
   useEffect(() => {
     lobbyStore.fetchLobby(id);
   }, [id, lobbyStore]);
-
+  const title = `Pedais - ${lobby?.name}`
 
   return (
-    <BasePage title={`Pedais - ${lobby?.name}`} noPadding loading={loadingFetchLobby}>
+    <BasePage title={title} noPadding loading={loadingFetchLobby}>
       <LobbyInformation lobby={lobby} />
 
       <Box padding={2}>
@@ -102,10 +103,14 @@ function Lobby({ lobbyStore }) {
             lobbyStore.currentUserIsInterested ? 'Deixar de participar' : 'Participar'
           }
         </IconButton>
+        <WhatsappShareButton style={{
+          width: '100%'
+        }} title={title} url={location.href} >
+          <IconButton bg="positive" Icon={Share2}>
+            Divulgar pelo whats app
+          </IconButton>
+        </WhatsappShareButton>
 
-        <IconButton bg="positive" Icon={Share2}>
-          Compartilhar
-        </IconButton>
       </Box>
 
       <Box p={2} color="text">
