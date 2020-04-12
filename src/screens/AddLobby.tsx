@@ -11,6 +11,8 @@ import { observer, inject } from "mobx-react";
 import { PlacesAutocomplete } from "../sharedComponents/PlacesAutocomplete";
 import { CustomSelect } from "../sharedComponents/CustomSelect";
 import { ImagePreview } from "../sharedComponents/ImagePreview";
+import { routes, HOME_ROUTE } from "../configuration/routes";
+import { useGoTo } from "../utils/MainRouter";
 
 const initialValues = {
   "cover-image": [],
@@ -20,9 +22,13 @@ const initialValues = {
 function AddLobby({ addLobbyStore, groupsStore }) {
   const imageInputRef = React.useRef<HTMLInputElement | null>(null);
   const { add: { pending: loading } } = addLobbyStore
+
+  const backToHome = useGoTo(HOME_ROUTE)
+  const goToLobby = useGoTo(routes.lobby)
+
   async function onSubmit(values) {
     console.log(values)
-    addLobbyStore.add({
+    const { id } = await addLobbyStore.add({
       name: values.title,
       date: parse(`${values.date} ${values.hour}`, 'yyyy-MM-dd HH:mm', new Date()),
       coverImage: values["cover-image"][0],
@@ -30,12 +36,15 @@ function AddLobby({ addLobbyStore, groupsStore }) {
       elevationGain: parseFloat(values['elevation-gain']),
       distance: parseFloat(values.distance),
     })
+
+    goToLobby({ id })
   }
 
   const groupOptions = groupsStore.groups.map(group => ({
     label: group.name,
     value: group.id
   }))
+
 
   return (
     <BasePage title="Pedais - Adicionar pedal">
@@ -117,7 +126,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
               Salvar
             </IconButton>
 
-            <Button color="text" bg="transparent">
+            <Button type="button" onClick={backToHome} color="text" bg="transparent">
               Cancelar
             </Button>
           </Box>

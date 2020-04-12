@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch, useHistory, generatePath } from "react-router-dom";
 import { routes } from "../configuration/routes";
 import PrivateRoute from "./routes";
 
@@ -14,4 +14,9 @@ export function MainRouter() {
       </Switch>
     </Router>
   );
+}
+
+export function useGoTo(route, hookParams = {}) {
+  const history = useHistory()
+  return (invokeParams) => history.push(generatePath(route.path, invokeParams || hookParams))
 }
