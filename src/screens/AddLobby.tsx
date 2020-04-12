@@ -7,36 +7,17 @@ import { IconButton } from "../sharedComponents/IconButton";
 import { Save } from "react-feather";
 import { Form } from "react-final-form";
 import { format, parse } from "date-fns";
-import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
-import { IMAGE_HEIGHT } from "../domains/lobby/ImagePlaceholder";
 import { observer, inject } from "mobx-react";
 import { PlacesAutocomplete } from "../sharedComponents/PlacesAutocomplete";
-
-const ImagePreview = ({
-  image = undefined,
-  onClick,
-  ...otherProps
-}: any) => {
-  const imageUrl = image && URL.createObjectURL(image);
-
-  return (
-    <ImageWithPlaceholder
-      onClick={onClick}
-      width={1}
-      height={IMAGE_HEIGHT}
-      url={imageUrl}
-      {...otherProps}
-    />
-  );
-};
+import { CustomSelect } from "../sharedComponents/CustomSelect";
+import { ImagePreview } from "../sharedComponents/ImagePreview";
 
 const initialValues = {
   "cover-image": [],
   date: format(new Date(), "yyyy-MM-dd")
 };
 
-
-function AddLobby({ addLobbyStore }) {
+function AddLobby({ addLobbyStore, groupsStore }) {
   const imageInputRef = React.useRef<HTMLInputElement | null>(null);
   const { add: { pending: loading } } = addLobbyStore
   async function onSubmit(values) {
@@ -45,10 +26,16 @@ function AddLobby({ addLobbyStore }) {
       name: values.title,
       date: parse(`${values.date} ${values.hour}`, 'yyyy-MM-dd HH:mm', new Date()),
       coverImage: values["cover-image"][0],
+      group: values["group"]?.value,
       elevationGain: parseFloat(values['elevation-gain']),
       distance: parseFloat(values.distance),
     })
   }
+
+  const groupOptions = groupsStore.groups.map(group => ({
+    label: group.name,
+    value: group.id
+  }))
 
   return (
     <BasePage>
@@ -75,6 +62,14 @@ function AddLobby({ addLobbyStore }) {
                 label="Título"
                 name="title"
                 input={<Input type="text" />}
+              />
+            </Box>
+
+            <Box mb={3}>
+              <Field
+                label="Grupo"
+                name="group"
+                input={<CustomSelect options={groupOptions} />}
               />
             </Box>
 
@@ -132,5 +127,5 @@ function AddLobby({ addLobbyStore }) {
   );
 }
 
-export default inject("addLobbyStore")(observer(AddLobby));
+export default inject("addLobbyStore", "groupsStore")(observer(AddLobby));
 

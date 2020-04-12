@@ -30,6 +30,7 @@
     "react-final-form": "^6.3.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-select": "^3.1.0",
     "rebass": "^4.0.7",
     "slugify": "^1.4.0",
     "tinycolor2": "^1.4.1",
