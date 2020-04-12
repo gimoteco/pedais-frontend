@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useParams, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Share2, User, UserMinus, UserPlus } from "react-feather";
+import { useParams } from "react-router-dom";
+import { WhatsappShareButton } from 'react-share';
+import { Box, Image, Text } from "rebass";
 import { BasePage } from "../domains/layout/BasePage";
-import { LobbyInformation } from "../domains/lobby/LobbyCard";
-import { Box, Text, Image } from "rebass";
-import { UserPlus, UserMinus, Share2, User } from "react-feather";
-import { IconButton } from "../sharedComponents/IconButton";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { Interesteds } from "../domains/lobby/Interesteds";
-import { WhatsappShareButton } from 'react-share'
+import { LobbyInformation } from "../domains/lobby/LobbyCard";
+import { IconButton } from "../sharedComponents/IconButton";
 
 function Section({ title, children, showIf = true }) {
   if (!showIf) return null;

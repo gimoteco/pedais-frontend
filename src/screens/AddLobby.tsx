@@ -1,17 +1,17 @@
-import React from "react";
-import { BasePage } from "../domains/layout/BasePage";
-import { Box, Heading, Button } from "rebass";
 import { Input, Textarea } from "@rebass/forms";
-import { Field } from "../sharedComponents/Field";
-import { IconButton } from "../sharedComponents/IconButton";
+import { format, parse } from "date-fns";
+import { inject, observer } from "mobx-react";
+import React from "react";
 import { Save } from "react-feather";
 import { Form } from "react-final-form";
-import { format, parse } from "date-fns";
-import { observer, inject } from "mobx-react";
-import { PlacesAutocomplete } from "../sharedComponents/PlacesAutocomplete";
+import { Box, Button, Heading } from "rebass";
+import { HOME_ROUTE, routes } from "../configuration/routes";
+import { BasePage } from "../domains/layout/BasePage";
 import { CustomSelect } from "../sharedComponents/CustomSelect";
+import { Field } from "../sharedComponents/Field";
+import { IconButton } from "../sharedComponents/IconButton";
 import { ImagePreview } from "../sharedComponents/ImagePreview";
-import { routes, HOME_ROUTE } from "../configuration/routes";
+import { PlacesAutocomplete } from "../sharedComponents/PlacesAutocomplete";
 import { useGoTo } from "../utils/MainRouter";
 
 const initialValues = {
