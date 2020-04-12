@@ -88,12 +88,9 @@ function Lobby({ lobbyStore }) {
     lobbyStore.fetchLobby(id);
   }, [id, lobbyStore]);
 
-  if (!lobby) {
-    return null;
-  }
 
   return (
-    <BasePage noPadding loading={loadingFetchLobby}>
+    <BasePage title={`Pedais - ${lobby?.name}`} noPadding loading={loadingFetchLobby}>
       <LobbyInformation lobby={lobby} />
 
       <Box padding={2}>

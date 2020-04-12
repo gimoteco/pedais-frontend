@@ -38,7 +38,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
   }))
 
   return (
-    <BasePage>
+    <BasePage title="Pedais - Adicionar pedal">
       <Heading mb={3}>Adicionar pedal</Heading>
 
       <Form onSubmit={onSubmit} initialValues={initialValues}>
