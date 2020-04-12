@@ -10,7 +10,7 @@ function LoadingIndicator({ isLoading }) {
 
   return (
     <Flex height={"100%"} alignItems="center" justifyContent="center">
-      <RotatingLoadingIndicator />
+      <RotatingLoadingIndicator color="primary" />
     </Flex>
   );
 }
