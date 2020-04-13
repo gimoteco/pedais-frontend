@@ -13,7 +13,7 @@ export async function getUser() {
   return user ? {
     id: user.attributes.sub,
     email: user.attributes.email,
-    token: user.signInUserSession.accessToken
+    token: user.signInUserSession.accessToken.jwtToken
   } : null;
 }
 
