@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Switch, useHistory, generatePath } from "react-router-dom";
+import { BrowserRouter as Router, generatePath, Route, Switch, useHistory } from "react-router-dom";
 import { routes } from "../configuration/routes";
 import PrivateRoute from "./routes";
 
