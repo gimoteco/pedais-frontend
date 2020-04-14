@@ -38,13 +38,13 @@ export function Field({
   label,
   input,
   unit = "",
-  afterLabel = undefined,
-  variant = undefined
+  afterLabel,
+  variant,
 }: FieldProps) {
   const nameSlug = slugify(name, { lower: true });
   return (
     <FinalFormField name={nameSlug}>
-      {({ input: inputProps }) => {
+      {({ input: inputProps, meta }) => {
         const adjustedInputProps = getInputPropsByFieldType(input, inputProps);
         return (
           <>
@@ -65,6 +65,7 @@ export function Field({
               )}
               <Unit unit={unit} variant={variant} />
             </Flex>
+            {meta.error && meta.touched && <Text mt={2} fontSize={0} color="negative">{meta.error}</Text>}
           </>
         );
       }}

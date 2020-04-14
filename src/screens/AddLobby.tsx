@@ -64,7 +64,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
               <Field
                 label="Imagem de capa"
                 name="cover-image"
-                input={<Input ref={imageInputRef} type="file" />}
+                input={<Input ref={imageInputRef} accept="image/png, image/jpeg" type="file" />}
               />
             </Box>
 
@@ -72,7 +72,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
               <Field
                 label="Título"
                 name="title"
-                input={<Input type="text" />}
+                input={<Input required type="text" />}
               />
             </Box>
 
@@ -85,7 +85,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
             </Box>
 
             <Box mb={3}>
-              <Field label="Data" name="date" input={<Input type="date" />} />
+              <Field label="Data" name="date" input={<Input required type="date" />} />
             </Box>
 
             <Box mb={3}>

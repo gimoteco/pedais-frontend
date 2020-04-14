@@ -5,7 +5,7 @@ import PrivateRoute from "./routes";
 
 export function MainRouter() {
   return (
-    <Router>
+    <Router forceRefresh>
       <Switch>
         {Object.values(routes).map((route: any) => {
           const RouteType = route.private ? PrivateRoute : Route;

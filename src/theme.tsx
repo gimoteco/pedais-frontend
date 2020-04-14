@@ -40,7 +40,9 @@ export const theme = {
     white: "#EEEDED",
     black: "#201C1C",
     text: "#201C1C",
-    positive: "#5BAB5E"
+    positive: "#5BAB5E",
+    negative: "#EA3A3A",
+
   },
   fonts: {
     heading: "'Source Sans Pro', sans-serif",
