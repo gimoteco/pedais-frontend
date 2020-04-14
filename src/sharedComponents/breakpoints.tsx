@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 const breakpoints = [
     '64em', '52em', '40em',
 ];
@@ -6,10 +6,10 @@ const breakpoints = [
 function useMedia(queries, values, defaultValue) {
     const mediaQueryLists = queries.map(q => window.matchMedia(q));
 
-    const getValue = () => {
+    const getValue = useCallback(() => {
         const index = mediaQueryLists.findIndex(mql => mql.matches);
         return typeof values[index] !== 'undefined' ? values[index] : defaultValue;
-    };
+    }, [mediaQueryLists, defaultValue, values]);
 
     const [value, setValue] = useState(getValue);
 
@@ -19,7 +19,7 @@ function useMedia(queries, values, defaultValue) {
             mediaQueryLists.forEach(mql => mql.addListener(handler));
             return () => mediaQueryLists.forEach(mql => mql.removeListener(handler));
         },
-        []
+        [mediaQueryLists, mediaQueryLists.length, getValue]
     );
 
     return value;
