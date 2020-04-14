@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Image } from "rebass";
-import { ImagePlaceholder } from "./ImagePlaceholder";
+import { useValueForBreakpoints } from "../../sharedComponents/breakpoints";
 import { getOptimizedImage } from "../../utils/image";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 export const ImageWithPlaceholder = ({
   url,
@@ -10,11 +11,16 @@ export const ImageWithPlaceholder = ({
   ...imageProps
 }: any) => {
   const [loading, setLoading] = useState(true);
+  const width = useValueForBreakpoints([
+    1024,
+    768,
+    365,
+  ])
   return (
     <>
       {url && (
         <Image
-          src={getOptimizedImage(url)}
+          src={getOptimizedImage(url, width)}
           {...imageProps}
           sx={{
             objectFit: "cover",
