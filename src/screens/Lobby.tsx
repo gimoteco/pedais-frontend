@@ -1,86 +1,17 @@
 import { inject, observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { Share2, User, UserMinus, UserPlus } from "react-feather";
+import { Share2, UserMinus, UserPlus } from "react-feather";
 import { useParams } from "react-router-dom";
 import { WhatsappShareButton } from 'react-share';
 import { Box, Text } from "rebass";
 import { BasePage } from "../domains/layout/BasePage";
-import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
+import { Section } from "../domains/layout/Section";
 import { Interesteds } from "../domains/lobby/Interesteds";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
 import { IconButton } from "../sharedComponents/IconButton";
-import { Map } from "./Map";
+import { Map } from "../sharedComponents/Map";
 
-function Section({ title, children, showIf = true }) {
-  if (!showIf) return null;
-
-  return (
-    <Box
-      mb={3}
-      sx={{
-        textTransform: "uppercase",
-        fontFamily: "body"
-      }}
-    >
-      <Text
-        fontFamily="body"
-        fontSize={3}
-        fontWeight="bold"
-        mb={2}
-        sx={{
-          textTransform: "uppercase"
-        }}
-      >
-        {title}
-      </Text>
-
-      {children}
-    </Box>
-  );
-}
-
-function AvatarPlaceholder({ sx }) {
-  return (
-    <Box
-      display="inline-flex"
-      width={40}
-      height={40}
-      color="white"
-      bg="gray"
-      sx={{
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 99,
-        ...sx
-      }}
-    >
-      <User size={25} />
-    </Box>
-  );
-}
-
-const AVATAR_SIZE = 40;
-
-export function Avatar({ user }) {
-  return (
-    <ImageWithPlaceholder
-      url={user.avatarUrl}
-      sx={{
-        borderRadius: 99,
-        "&:not(:last-child)": {
-          mr: 1,
-          mb: 1
-        }
-      }}
-      width={AVATAR_SIZE}
-      height={AVATAR_SIZE}
-      Placeholder={AvatarPlaceholder}
-      alt={user.email}
-      title={user.email}
-      notLoadingDisplay="inline-block"
-    />
-  );
-}
+export const AVATAR_SIZE = 40;
 
 function Lobby({ lobbyStore }) {
   const { id } = useParams();

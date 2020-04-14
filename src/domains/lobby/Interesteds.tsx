@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass";
-import { Avatar } from "../../screens/Lobby";
+import { Avatar } from "../../sharedComponents/Avatar";
 
 export function Interesteds({ interesteds }) {
   return (

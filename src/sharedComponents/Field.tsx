@@ -1,13 +1,14 @@
-import React from "react";
-import slugify from "slugify";
 import { Label } from "@rebass/forms";
-import { Flex, Text } from "rebass";
+import React from "react";
 import { Field as FinalFormField } from "react-final-form";
+import { Flex, Text } from "rebass";
+import slugify from "slugify";
 
 interface FieldProps {
   name: string;
   label: string;
   input: JSX.Element;
+  afterLabel?: JSX.Element;
   unit?: string;
   variant?: string;
 }
@@ -37,6 +38,7 @@ export function Field({
   label,
   input,
   unit = "",
+  afterLabel = undefined,
   variant = undefined
 }: FieldProps) {
   const nameSlug = slugify(name, { lower: true });
@@ -52,6 +54,7 @@ export function Field({
               {...(variant ? { variant: `label.${variant}` } : {})}
             >
               {label}
+              {afterLabel && React.cloneElement(afterLabel, { onChange: inputProps.onChange })}
             </Label>
             <Flex alignItems="center">
               {React.cloneElement(

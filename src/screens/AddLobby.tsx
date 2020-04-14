@@ -7,6 +7,7 @@ import { Form } from "react-final-form";
 import { Box, Button, Heading } from "rebass";
 import { HOME_ROUTE, routes } from "../configuration/routes";
 import { BasePage } from "../domains/layout/BasePage";
+import { SuggestDefaultSafetyWarning } from "../domains/lobby/SuggestDefaultSafetyWarning";
 import { CustomSelect } from "../sharedComponents/CustomSelect";
 import { Field } from "../sharedComponents/Field";
 import { IconButton } from "../sharedComponents/IconButton";
@@ -116,6 +117,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
               <Field
                 name="safety-instructions"
                 label="Instruções de segurança"
+                afterLabel={<SuggestDefaultSafetyWarning />}
                 input={
                   <Textarea placeholder="Digite aqui instruções para garantir a segurança" />
                 }
