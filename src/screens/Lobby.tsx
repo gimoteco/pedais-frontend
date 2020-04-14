@@ -10,6 +10,7 @@ import { Interesteds } from "../domains/lobby/Interesteds";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
 import { IconButton } from "../sharedComponents/IconButton";
 import { Map } from "../sharedComponents/Map";
+import { formatDateTime } from "../utils/date";
 
 export const AVATAR_SIZE = 40;
 
@@ -43,10 +44,23 @@ function Lobby({ lobbyStore }) {
               Divulgar pelo whats app
           </IconButton>
           </WhatsappShareButton>
-
         </Box>
 
         <Box p={2} color="text">
+          <Section title="Informações gerais">
+            <p>
+              Data: {formatDateTime(new Date(lobby.date))}
+            </p>
+            <p>
+              Distância: {lobby.distance} <abbr title="kilometros por hora">km</abbr>
+            </p>
+            <p>
+              Ganho de elevação: {lobby.elevationGain} <abbr title="metros">m</abbr>
+            </p>
+            {lobby.creator && <p>
+              Criador: {lobby.creator.email}
+            </p>}
+          </Section>
           <Section showIf={lobby.location} title="Local de partida">
             <Text
               sx={{

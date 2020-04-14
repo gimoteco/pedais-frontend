@@ -11,6 +11,9 @@ query lobby($id: String!) {
     }
     location
     safetyInstructions
+    creator {
+      email
+    }
     interested {
       id
       email
