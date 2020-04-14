@@ -61,9 +61,9 @@ function Lobby({ lobbyStore }) {
 
           </Section>
 
-          <Section title="Segurança">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, itaque.
-        </Section>
+          <Section title="Instruções de segurança" showIf={lobby.safetyInstructions}>
+            {lobby.safetyInstructions}
+          </Section>
 
           <Section
             showIf={interested.length > 0}

@@ -20,6 +20,6 @@ export const Map = ({ placeName }) => {
     return <Image
         width={1}
         height={250}
-        src={`https://maps.googleapis.com/maps/api/staticmap?center=&zoom=13&scale=2&size=${width}x${height}&maptype=roadmap&key=AIzaSyDN46Q5BVfXgArF54AqYuwzTbrjhtXJGb8&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C${placeName}`}
+        src={`https://maps.googleapis.com/maps/api/staticmap?center=&zoom=15&scale=2&size=${width}x${height}&maptype=roadmap&key=AIzaSyDN46Q5BVfXgArF54AqYuwzTbrjhtXJGb8&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C${placeName}`}
     />
 }

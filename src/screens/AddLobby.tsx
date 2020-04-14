@@ -36,6 +36,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
       elevationGain: parseFloat(values['elevation-gain']),
       distance: parseFloat(values.distance),
       location: values["encounter-point"]?.label,
+      safetyInstructions: values["safety-instructions"],
     })
 
     goToLobby({ id })

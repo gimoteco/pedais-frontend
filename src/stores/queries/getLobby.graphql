@@ -10,6 +10,7 @@ query lobby($id: String!) {
       name
     }
     location
+    safetyInstructions
     interested {
       id
       email
