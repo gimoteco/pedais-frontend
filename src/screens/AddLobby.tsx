@@ -34,6 +34,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
       group: values["group"]?.value,
       elevationGain: parseFloat(values['elevation-gain']),
       distance: parseFloat(values.distance),
+      location: values["encounter-point"]?.label,
     })
 
     goToLobby({ id })
@@ -90,7 +91,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
             </Box>
 
             <Box mb={3}>
-              <Field label="Ponto de encontro" name="encounter-point" input={<PlacesAutocomplete />} />
+              <Field label="Ponto de encontro" name="encounter-point" input={<PlacesAutocomplete placeholder="Buscar" />} />
             </Box>
 
             <Box mb={3}>

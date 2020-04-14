@@ -3,12 +3,13 @@ import React, { useEffect } from "react";
 import { Share2, User, UserMinus, UserPlus } from "react-feather";
 import { useParams } from "react-router-dom";
 import { WhatsappShareButton } from 'react-share';
-import { Box, Image, Text } from "rebass";
+import { Box, Text } from "rebass";
 import { BasePage } from "../domains/layout/BasePage";
 import { ImageWithPlaceholder } from "../domains/lobby/ImageWithPlaceholder";
 import { Interesteds } from "../domains/lobby/Interesteds";
 import { LobbyInformation } from "../domains/lobby/LobbyCard";
 import { IconButton } from "../sharedComponents/IconButton";
+import { Map } from "./Map";
 
 function Section({ title, children, showIf = true }) {
   if (!showIf) return null;
@@ -83,7 +84,7 @@ export function Avatar({ user }) {
 
 function Lobby({ lobbyStore }) {
   const { id } = useParams();
-  const { lobby, currentUserIsInterested, interested, fetchLobby: { pending: loadingFetchLobby } } = lobbyStore;
+  const { lobby, currentUserIsInterested, toggleInterest, interested, fetchLobby: { pending: loadingFetchLobby } } = lobbyStore;
   const location = window.location
   useEffect(() => {
     lobbyStore.fetchLobby(id);
@@ -92,59 +93,55 @@ function Lobby({ lobbyStore }) {
 
   return (
     <BasePage title={title} noPadding loading={loadingFetchLobby}>
-      <LobbyInformation lobby={lobby} />
+      {lobby && <>
+        <LobbyInformation lobby={lobby} />
 
-      <Box padding={2}>
-        <IconButton
-          Icon={currentUserIsInterested ? UserMinus : UserPlus}
-          loading={lobbyStore.toggleInterest.pending}
-          onClick={() => lobbyStore.toggleInterest(id)}>
-          {
-            lobbyStore.currentUserIsInterested ? 'Deixar de participar' : 'Participar'
-          }
-        </IconButton>
-        <WhatsappShareButton style={{
-          width: '100%'
-        }} title={title} url={location.href} >
-          <IconButton bg="positive" Icon={Share2}>
-            Divulgar pelo whats app
+        <Box padding={2}>
+          <IconButton
+            Icon={currentUserIsInterested ? UserMinus : UserPlus}
+            loading={toggleInterest.pending}
+            onClick={() => toggleInterest(id)}>
+            {
+              currentUserIsInterested ? 'Deixar de participar' : 'Participar'
+            }
           </IconButton>
-        </WhatsappShareButton>
+          <WhatsappShareButton style={{
+            width: '100%'
+          }} title={title} url={location.href} >
+            <IconButton bg="positive" Icon={Share2}>
+              Divulgar pelo whats app
+          </IconButton>
+          </WhatsappShareButton>
 
-      </Box>
+        </Box>
 
-      <Box p={2} color="text">
-        <Section title="Local de partida">
-          <Text
-            sx={{
-              textTransform: "uppercase"
-            }}
-            fontFamily={"body"}
-            mb={2}
+        <Box p={2} color="text">
+          <Section showIf={lobby.location} title="Local de partida">
+            <Text
+              sx={{
+                textTransform: "uppercase"
+              }}
+              fontFamily={"body"}
+              mb={2}
+            >
+              {lobby.location}
+            </Text>
+            <Map placeName={lobby.location}></Map>
+
+          </Section>
+
+          <Section title="Segurança">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, itaque.
+        </Section>
+
+          <Section
+            showIf={interested.length > 0}
+            title={`Participantes (${interested.length})`}
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor aut
-            eos exercitationem nobis neque pariatur velit quas molestiae eaque
-            est?
-          </Text>
-
-          <Image
-            width={1}
-            height={250}
-            src="https://maps.googleapis.com/maps/api/staticmap?center=&zoom=13&scale=1&size=400x250&maptype=roadmap&key=AIzaSyDN46Q5BVfXgArF54AqYuwzTbrjhtXJGb8&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7CPosto+Faleiros"
-          />
-        </Section>
-
-        <Section title="Segurança">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, itaque.
-        </Section>
-
-        <Section
-          showIf={interested.length > 0}
-          title={`Participantes (${interested.length})`}
-        >
-          <Interesteds interesteds={interested} />
-        </Section>
-      </Box>
+            <Interesteds interesteds={interested} />
+          </Section>
+        </Box>
+      </>}
     </BasePage>
   );
 }

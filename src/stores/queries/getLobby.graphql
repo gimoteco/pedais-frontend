@@ -9,6 +9,7 @@ query lobby($id: String!) {
     group {
       name
     }
+    location
     interested {
       id
       email
