@@ -1,10 +1,10 @@
-import { computed, observable } from "mobx";
-import { apolloClient } from "../configuration/graphql";
 import { gql } from "apollo-boost";
+import { loader } from "graphql.macro";
+import { computed, observable } from "mobx";
+import { task } from "mobx-task";
+import { apolloClient } from "../configuration/graphql";
 import authStore, { AuthStore } from "./authStore";
 import { Lobby, User } from "./types";
-import { loader } from "graphql.macro";
-import { task } from "mobx-task";
 
 const getLobby = loader("./queries/getLobby.graphql");
 
@@ -58,7 +58,7 @@ export class LobbyStore {
   @computed get currentUserIsInterested() {
     return (
       this.authStore.isLogged &&
-      this.interested.map(i => i.id).includes(this.authStore.currentUser.id)
+      this.interested.map(i => i.id).includes(this.authStore.domainUser?.id)
     );
   }
 }

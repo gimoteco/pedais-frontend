@@ -1,6 +1,10 @@
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import { Auth, Hub } from "aws-amplify";
+import { loader } from "graphql.macro";
 import { action, computed, observable } from "mobx";
+import { task } from "mobx-task";
+import { apolloClient } from "../configuration/graphql";
+const meQuery = loader("./queries/me.graphql");
 
 export async function getUser() {
   let user;
@@ -19,6 +23,7 @@ export async function getUser() {
 
 export class AuthStore {
   @observable currentUser: any = null;
+  @observable domainUser: any = null;
   @observable loadingUser = true;
 
   constructor() {
@@ -37,6 +42,7 @@ export class AuthStore {
   loadCurrentUser = async () => {
     this.currentUser = await getUser();
     this.loadingUser = false;
+    await this.fetchCurrentUser()
   };
 
   @action login = () => {
@@ -55,6 +61,11 @@ export class AuthStore {
       this.currentUser = null;
     });
   };
+
+  @task async fetchCurrentUser() {
+    const userResponse = await apolloClient.query({ query: meQuery })
+    this.domainUser = userResponse.data.me
+  }
 
   @computed get isLogged() {
     return this.currentUser != null;
