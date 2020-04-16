@@ -1,13 +1,14 @@
+import { loader } from "graphql.macro";
 import { observable } from "mobx";
+import { task } from 'mobx-task';
 import { apolloClient } from "../configuration/graphql";
 import { Lobby } from "./types";
-import { loader } from "graphql.macro";
-import { task } from 'mobx-task'
 
 const getLobbies = loader("./queries/getLobbies.graphql");
 
 export class LobbiesStore {
   @observable lobbies: Lobby[] = [];
+  @observable myParties: Lobby[] = [];
   @observable uploadUrl?: string;
 
   constructor() {
@@ -18,7 +19,8 @@ export class LobbiesStore {
     const result = await apolloClient.query({
       query: getLobbies
     });
-    this.lobbies = result.data.parties;
+    this.lobbies = result.data.nextParties;
+    this.myParties = result.data.myParties;
   };
 }
 

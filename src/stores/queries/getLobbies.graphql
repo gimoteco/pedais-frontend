@@ -1,5 +1,4 @@
-query getLobbies {
-  parties {
+fragment PartyCardInfo on Party {
     id
     name
     distance
@@ -14,5 +13,13 @@ query getLobbies {
       email
       avatarUrl
     }
+}
+
+query getLobbies {
+  nextParties {
+    ...PartyCardInfo
+  }
+  myParties {
+    ...PartyCardInfo
   }
 }
