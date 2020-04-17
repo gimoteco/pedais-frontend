@@ -35,7 +35,7 @@ function Lobbies({ lobbiesStore }) {
         Criar pedal
       </IconButton>
 
-      <Section showIf={myParties.length} title="Meus pedais">
+      <Section showIf={myParties && myParties.length} title="Meus pedais">
         {myParties.map(party => (
           <Card onClick={() => goToLobby(party)} key={party.id} lobby={party} />
         ))}
