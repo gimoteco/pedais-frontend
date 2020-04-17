@@ -1,12 +1,18 @@
+import { inject, observer } from "mobx-react";
 import React from "react";
-import { Flex, Box } from "rebass";
 import { ChevronLeft } from "react-feather";
 import { useHistory } from "react-router-dom";
+import { Box, Flex, Link } from "rebass";
+import { routes } from "../../configuration/routes";
+import { AuthStore } from "../../stores/authStore";
+import { useGoTo } from "../../utils/MainRouter";
 import { Logo } from "./Logo";
 
-export const Header = () => {
+const Header = ({ authStore }: { authStore?: AuthStore }) => {
   const history = useHistory();
   const canGoBack = history.length;
+  const goToLogin = useGoTo(routes.login)
+  const { isLogged, logout } = authStore!
 
   function back() {
     history.goBack();
@@ -31,7 +37,24 @@ export const Header = () => {
         </Box>
 
         <Logo width="45%" />
+
+        <Box
+          sx={{
+            position: "absolute",
+            right: 0,
+            Link: {
+              fontWeight: 'bold'
+            }
+          }}
+          pr={2}
+        >
+          {!isLogged && <Link onClick={goToLogin}>Entrar</Link>}
+          {isLogged && <Link onClick={logout}>Sair</Link>}
+        </Box>
       </Flex>
     </Box>
   );
 };
+
+
+export default inject("authStore")(observer(Header))

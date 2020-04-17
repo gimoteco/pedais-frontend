@@ -15,12 +15,11 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "https://pedais.surge.sh/",
-        "redirectSignOut": "http://localhost:3000/",
+        "redirectSignIn": process.env.REACT_APP_REDIRECT_AFTER_SIGN_IN,
+        "redirectSignOut": process.env.REACT_APP_REDIRECT_AFTER_SIGN_OUT,
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS"
 };
-
 
 export default awsmobile;
