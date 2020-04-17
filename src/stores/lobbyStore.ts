@@ -29,9 +29,7 @@ export class LobbyStore {
       }
     });
 
-
-    const currentUser = this.authStore.currentUser;
-
+    const currentUser = this.authStore.domainUser;
 
     this.interested = this.currentUserIsInterested ? this.interested.filter(i => i.id !== currentUser.id) : [
       {

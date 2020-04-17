@@ -19,8 +19,8 @@ export class LobbiesStore {
     const result = await apolloClient.query({
       query: getLobbies
     });
-    this.lobbies = result.data.nextParties;
-    this.myParties = result.data.myParties;
+    this.lobbies = result.data.nextParties ?? [];
+    this.myParties = result.data.myParties ?? [];
   };
 }
 
