@@ -32,8 +32,8 @@ jobs:
       run: npm run build
       env: 
         REACT_APP_API_HOSTNAME: https://immense-taiga-57223.herokuapp.com/graphql
-        REACT_APP_REDIRECT_AFTER_SIGN_IN=https://pedais.surge.sh/
-        REACT_APP_REDIRECT_AFTER_SIGN_OUT=https://pedais.surge.sh/
+        REACT_APP_REDIRECT_AFTER_SIGN_IN: https://pedais.surge.sh/
+        REACT_APP_REDIRECT_AFTER_SIGN_OUT: https://pedais.surge.sh/
   
     - name: Prepare for surge
       run: cp ./build/index.html ./build/200.html
