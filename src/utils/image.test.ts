@@ -20,7 +20,7 @@ describe("image utils", () => {
             expect(optimizedUrl).toBe(url)
         })
 
-        it.each([null, '', false])('should not generate url for %p', (falsyValueUrl) => {
+        it.each([null, '', false, undefined])('should not generate url for %p', (falsyValueUrl) => {
             const width = 100
 
             const optimizedUrl = getOptimizedImage(falsyValueUrl as string, width)
