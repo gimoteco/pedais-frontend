@@ -6,8 +6,9 @@ import { anchor, ToggleLayer } from "react-laag"
 import { Box, Flex, Link } from "rebass"
 import { routes } from "../../configuration/routes"
 import { useGoTo } from "../../utils/MainRouter"
+import { Logo } from "./Logo"
 
-const MenuItem = React.forwardRef<any, any>(({ children = "", onClick = console.log, active = false, disabled = false, sx = {}, variant = "menu-item" }, ref) => {
+const MenuItem = React.forwardRef<any, any>(({ children = "", onClick = null, active = false, disabled = false, sx = {}, variant = "menu-item" }, ref) => {
     return <Link ref={ref} variant={variant} sx={sx} onClick={onClick} className={classnames({
         active,
         disabled
@@ -18,7 +19,7 @@ const MenuItem = React.forwardRef<any, any>(({ children = "", onClick = console.
 
 MenuItem.displayName = "MenuItem"
 
-const UserMenu = inject("authStore")(observer(({ authStore: { currentUser, logout } }: any) => {
+const UserMenu = inject("authStore")(observer(({ authStore: { currentUser, logout }, sx }: any) => {
     return <ToggleLayer closeOnOutsideClick placement={{ anchor: anchor.BOTTOM_RIGHT }} renderLayer={({ layerProps, isOpen }) =>
         isOpen && (
             <Box
@@ -36,35 +37,46 @@ const UserMenu = inject("authStore")(observer(({ authStore: { currentUser, logou
     }>
         {({ toggle, triggerRef }) => <MenuItem sx={{
             display: "flex",
+            ...sx
         }} ref={triggerRef} onClick={toggle}>{currentUser.email} <ChevronDown size={20} /></MenuItem>
         }
     </ToggleLayer >
 }))
 
-const UserMenuItem = inject("authStore")(observer(({ authStore }: any) => {
+const UserMenuItem = inject("authStore")(observer(({ authStore, sx = {} }: any) => {
     const goToLogin = useGoTo(routes.login)
     const { isLogged } = authStore!
 
     if (authStore.fetchCurrentUser.pending || authStore.loadingUser) return null
 
     if (isLogged) {
-        return <UserMenu />
+        return <UserMenu sx={sx} />
     }
 
-    return <MenuItem onClick={goToLogin}>
+    return <MenuItem onClick={goToLogin} sx={sx}>
         Entrar
     </MenuItem>
 }))
 
 function Menu() {
-    return <Flex mt={[3, 0]} ml={[0, 3]} alignItems="center" flexWrap="wrap" justifyContent="center">
-        <MenuItem active>Treinos</MenuItem>
-        <MenuItem disabled>Competições</MenuItem>
-        <MenuItem disabled>Grupos</MenuItem>
 
-        <Flex ml={[0, 5]} mt={[3, 0]}>
-            <UserMenuItem />
+    return <Flex flex={1} flexDirection={["column", "column", "row"]} alignItems="center" flexWrap="wrap" justifyContent="center">
+        <Logo sx={{
+            mr: [0, 5],
+            mb: [3, 0]
+        }} width="180px" />
+
+        <Flex alignItems="center" flexWrap="wrap" justifyContent="center">
+            <MenuItem active>Treinos</MenuItem>
+            <MenuItem disabled>Competições</MenuItem>
+            <MenuItem disabled>Grupos</MenuItem>
+            <MenuItem disabled>Classificados</MenuItem>
+
         </Flex>
+
+        <UserMenuItem sx={{
+            ml: [0, 5]
+        }} />
     </Flex>
 }
 

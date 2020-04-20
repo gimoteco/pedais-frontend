@@ -1,5 +1,6 @@
 import React from "react"
 import { Box } from "rebass"
+import grungeTexture from "./grunge.png"
 
 export const Stamp = ({ children, sx }) => {
     return <Box as="span" sx={{
@@ -15,9 +16,9 @@ export const Stamp = ({ children, sx }) => {
         textTransform: "uppercase",
         borderRadius: "1rem",
         fontFamily: "Courier",
-        "-webkit-mask-image": "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png')",
-        "-webkit-mask-size": "944px 604px",
-        "mix-blend-mode": "normal",
+        "maskImage": `url('${grungeTexture}')`,
+        "maskSize": "944px 604px",
+        "mixBlendMode": "normal",
         ...sx
     }}>
         {children}

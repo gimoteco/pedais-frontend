@@ -66,7 +66,7 @@ const defaultMenuItem = {
         opacity: 0.8
     },
     "&:not(:last-of-type)": {
-        mr: 4
+        mr: 3
     },
 }
 
