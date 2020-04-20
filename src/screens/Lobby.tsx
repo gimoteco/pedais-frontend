@@ -76,7 +76,7 @@ function Lobby({ lobbyStore }) {
           </Section>
 
           <Section title="Instruções de segurança" showIf={lobby.safetyInstructions}>
-            {lobby.safetyInstructions}
+            <p dangerouslySetInnerHTML={{ __html: lobby.safetyInstructions?.replace(/(?:\r\n|\r|\n)/g, '<br />') }}></p>
           </Section>
 
           <Section
