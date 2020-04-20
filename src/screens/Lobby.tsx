@@ -21,6 +21,7 @@ function Lobby({ lobbyStore }) {
     useEffect(() => {
         lobbyStore.fetchLobby(id)
     }, [id, lobbyStore])
+
     const title = `Pedais - ${lobby?.name}`
 
     return (
@@ -41,7 +42,7 @@ function Lobby({ lobbyStore }) {
                         width: "100%"
                     }} title={title} url={location.href} >
                         <IconButton bg="positive" Icon={Share2}>
-              Divulgar pelo whats app
+                            Divulgar pelo whats app
                         </IconButton>
                     </WhatsappShareButton>
                 </Box>
@@ -49,16 +50,16 @@ function Lobby({ lobbyStore }) {
                 <Box p={2} color="text">
                     <Section title="Informações gerais">
                         <p>
-              Data: {formatDateTime(new Date(lobby.date))}
+                            Data: {formatDateTime(new Date(lobby.date))}
                         </p>
                         <p>
-              Distância: {lobby.distance} <abbr title="kilometros por hora">km</abbr>
+                            Distância: {lobby.distance} <abbr title="kilometros por hora">km</abbr>
                         </p>
                         <p>
-              Ganho de elevação: {lobby.elevationGain} <abbr title="metros">m</abbr>
+                            Ganho de elevação: {lobby.elevationGain} <abbr title="metros">m</abbr>
                         </p>
                         {lobby.creator && <p>
-              Criador: {lobby.creator.email}
+                            Criador: {lobby.creator.email}
                         </p>}
                     </Section>
                     <Section showIf={lobby.location} title="Local de partida">

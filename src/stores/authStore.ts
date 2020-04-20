@@ -29,10 +29,10 @@ export class AuthStore {
     constructor() {
         Hub.listen("auth", async ({ payload: { event } }) => {
             switch (event) {
-            case "signIn":
-                this.currentUser = await getUser()
-                this.loadingUser = false
-                break
+                case "signIn":
+                    this.currentUser = await getUser()
+                    this.loadingUser = false
+                    break
             }
         })
 

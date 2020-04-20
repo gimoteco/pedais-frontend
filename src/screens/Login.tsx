@@ -1,10 +1,10 @@
-import React from "react"
-import { Flex, Box, Button } from "rebass"
-import { Logo } from "../domains/layout/Logo"
 import { Input } from "@rebass/forms"
-import { Field } from "../sharedComponents/Field"
+import { inject, observer } from "mobx-react"
+import React from "react"
 import { Form } from "react-final-form"
-import { observer, inject } from "mobx-react"
+import { Box, Button, Flex } from "rebass"
+import { Logo } from "../domains/layout/Logo"
+import { Field } from "../sharedComponents/Field"
 
 function Login({ authStore }) {
     return (
@@ -25,9 +25,11 @@ function Login({ authStore }) {
                         flexDirection="column"
                         onSubmit={handleSubmit}
                     >
-                        <Logo width="45%" />
+                        <Flex justifyContent="center">
+                            <Logo width={["200px", "300px"]} />
+                        </Flex>
 
-                        <Box width={1} mt={3} mb={2}>
+                        <Box width={1} mt={4} mb={2}>
                             <Field
                                 label="Email"
                                 name="email"
@@ -54,7 +56,7 @@ function Login({ authStore }) {
                         </Box>
 
                         <Button variant="transparent" mt={3} type="submit">
-              Entrar
+                            Entrar
                         </Button>
 
                         <Button
@@ -63,7 +65,7 @@ function Login({ authStore }) {
                             type="button"
                             onClick={authStore.loginWithFacebook}
                         >
-              Entrar com Facebook
+                            Entrar com Facebook
                         </Button>
                     </Flex>
                 )}

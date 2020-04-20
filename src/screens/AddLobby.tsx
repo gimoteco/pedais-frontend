@@ -126,11 +126,11 @@ function AddLobby({ addLobbyStore, groupsStore }) {
                         </Box>
 
                         <IconButton loading={loading} Icon={Save} variant="secondary">
-              Salvar
+                            Salvar
                         </IconButton>
 
                         <Button type="button" onClick={backToHome} color="text" bg="transparent">
-              Cancelar
+                            Cancelar
                         </Button>
                     </Box>
                 )}
