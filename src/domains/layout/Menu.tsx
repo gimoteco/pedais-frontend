@@ -4,6 +4,7 @@ import React from "react"
 import { ChevronDown } from "react-feather"
 import { anchor, ToggleLayer } from "react-laag"
 import { Box, Flex, Link } from "rebass"
+import ResizeObserver from "resize-observer-polyfill"
 import { routes } from "../../configuration/routes"
 import { useGoTo } from "../../utils/MainRouter"
 import { Logo } from "./Logo"
@@ -20,7 +21,7 @@ const MenuItem = React.forwardRef<any, any>(({ children = "", onClick = null, ac
 MenuItem.displayName = "MenuItem"
 
 const UserMenu = inject("authStore")(observer(({ authStore: { currentUser, logout }, sx }: any) => {
-    return <ToggleLayer closeOnOutsideClick placement={{ anchor: anchor.BOTTOM_RIGHT }} renderLayer={({ layerProps, isOpen }) =>
+    return <ToggleLayer ResizeObserver={ResizeObserver} closeOnOutsideClick placement={{ anchor: anchor.BOTTOM_RIGHT }} renderLayer={({ layerProps, isOpen }) =>
         isOpen && (
             <Box
                 bg="white"
