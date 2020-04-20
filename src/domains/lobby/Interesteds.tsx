@@ -6,7 +6,12 @@ export function Interesteds({ interesteds }) {
     return (
         <Flex flexWrap="wrap">
             {interesteds.map(user => (
-                <Avatar key={user.id} user={user} />
+                <Avatar key={user.id} user={user} sx={{
+                    "&:not(:last-child)": {
+                        mr: 1,
+                        mb: 1
+                    }
+                }} />
             ))}
         </Flex>
     )

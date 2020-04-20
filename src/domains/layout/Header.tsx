@@ -8,7 +8,7 @@ export function Header() {
         <Flex justifyContent="center" bg="primary">
             <Flex
                 color={"white"}
-                padding={3}
+                padding={2}
                 flexWrap="wrap"
                 width={[1, 0.5]}
                 justifyContent={["center", "space-between"]}

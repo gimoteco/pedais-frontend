@@ -1,3 +1,15 @@
+import { rgba } from "./utils/color"
+
+const colors = {
+    primary: "#EA3A3A",
+    secondary: "#4758D6",
+    white: "#EEEDED",
+    black: "#201C1C",
+    text: "#201C1C",
+    positive: "#5BAB5E",
+    negative: "#EA3A3A"
+}
+
 const defaultInputStyle = {
     color: "text",
     border: "none",
@@ -33,17 +45,33 @@ const defaultButton = {
     }
 }
 
-export const theme = {
-    colors: {
-        primary: "#EA3A3A",
-        secondary: "#4758D6",
-        white: "#EEEDED",
-        black: "#201C1C",
-        text: "#201C1C",
-        positive: "#5BAB5E",
-        negative: "#EA3A3A",
-
+const defaultMenuItem = {
+    color: "white",
+    fontSize: [1, 2],
+    cursor: "pointer",
+    fontFamily: "heading",
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    borderBottom: "2px solid transparent",
+    paddingBottom: 2,
+    "&.active": {
+        borderBottom: "2px solid white"
     },
+    "&.disabled": {
+        opacity: 0.2,
+        cursor: "default"
+    },
+    "&:hover:not(.disabled)": {
+        borderBottom: `2px solid ${rgba(colors.white, 0.8)}`,
+        opacity: 0.8
+    },
+    "&:not(:last-of-type)": {
+        mr: 4
+    },
+}
+
+export const theme = {
+    colors,
     fonts: {
         heading: "'Source Sans Pro', sans-serif",
         body: "'Source Sans Pro', sans-serif",
@@ -79,6 +107,13 @@ export const theme = {
             borderWidth: 1,
             borderStyle: "solid",
             bg: "transparent"
+        }
+    },
+    variants: {
+        "menu-item": defaultMenuItem,
+        "secondary-menu-item": {
+            ...defaultMenuItem,
+            color: "text"
         }
     },
     forms: {
