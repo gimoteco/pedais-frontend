@@ -14,6 +14,20 @@ import { formatDateTime } from "../utils/date"
 
 export const AVATAR_SIZE = 40
 
+const SHARE_MESSAGE = (lobby) => `
+Pedais - *${lobby.name}*
+
+Data: *${formatDateTime(new Date(lobby.date))}*
+
+${lobby.distance ? `Distância: *${lobby.distance}*` : ""}
+${lobby.elevationGain ? `Ganho de elevação: *${lobby.elevationGain}m*` : ""}
+${lobby.location ? `Local de saída: *${lobby.location}km*` : ""}
+
+${lobby.safetyInstructions ? `*Instruções de segurança*: 
+${lobby.safetyInstructions}` : ""}
+
+Confirme sua participação em: `
+
 function Lobby({ lobbyStore }) {
     const { id } = useParams()
     const { lobby, currentUserIsInterested, toggleInterest, interested, fetchLobby: { pending: loadingFetchLobby } } = lobbyStore
@@ -40,7 +54,7 @@ function Lobby({ lobbyStore }) {
                     </IconButton>
                     <WhatsappShareButton style={{
                         width: "100%"
-                    }} title={title} url={location.href} >
+                    }} title={SHARE_MESSAGE(lobby)} url={location.href} >
                         <IconButton bg="positive" Icon={Share2}>
                             Divulgar pelo whats app
                         </IconButton>
