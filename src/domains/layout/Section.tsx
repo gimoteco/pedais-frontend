@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Text } from "rebass";
+
 export function Section({ title, children, showIf = true }) {
     if (!showIf)
         return null;

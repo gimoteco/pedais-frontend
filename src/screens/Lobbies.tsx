@@ -1,11 +1,12 @@
 import { inject, observer } from "mobx-react";
 import React from "react";
 import { PlusCircle } from "react-feather";
-import { useHistory } from "react-router-dom";
 import { Box, Heading } from "rebass";
+import { routes } from "../configuration/routes";
 import { BasePage } from "../domains/layout/BasePage";
 import { Card } from "../domains/lobby/LobbyCard";
 import { IconButton } from "../sharedComponents/IconButton";
+import { useGoTo } from "../utils/MainRouter";
 
 function Section({ children, title, showIf = true }) {
   if (!showIf) return null
@@ -19,14 +20,11 @@ function Section({ children, title, showIf = true }) {
 
 function Lobbies({ lobbiesStore }) {
   const { lobbies, myParties, fetchLobbies: { pending: loading } } = lobbiesStore;
-  const history = useHistory();
+  const goToLobbyHook = useGoTo(routes.lobby)
+  const goToAddLobby = useGoTo(routes.addLobby)
 
-  function goToLobby(lobby) {
-    history.push(`/lobby/${lobby.id}`);
-  }
-
-  function goToAddLobby() {
-    history.push(`/lobby/add`);
+  function goToLobby(party) {
+    goToLobbyHook({ id: party.id })
   }
 
   return (
