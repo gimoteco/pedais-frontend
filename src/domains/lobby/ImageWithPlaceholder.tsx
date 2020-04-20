@@ -8,6 +8,7 @@ export const ImageWithPlaceholder = ({
     url,
     Placeholder = ImagePlaceholder,
     notLoadingDisplay = "block",
+    isPast,
     ...imageProps
 }: any) => {
     const [loading, setLoading] = useState(true)
@@ -25,6 +26,7 @@ export const ImageWithPlaceholder = ({
                     sx={{
                         objectFit: "cover",
                         display: loading ? "none" : notLoadingDisplay,
+                        filter: isPast ? "grayscale(100%)" : "none",
                         ...imageProps.sx
                     }}
                     onLoad={() => setLoading(false)}

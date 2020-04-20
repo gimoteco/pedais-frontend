@@ -80,7 +80,7 @@ function AddLobby({ addLobbyStore, groupsStore }) {
                             <Field
                                 label="Grupo"
                                 name="group"
-                                input={<CustomSelect options={groupOptions} />}
+                                input={<CustomSelect placeholder="Selecione um grupo" options={groupOptions} />}
                             />
                         </Box>
 

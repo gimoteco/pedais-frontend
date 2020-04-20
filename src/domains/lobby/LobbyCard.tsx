@@ -1,19 +1,28 @@
 import React from "react"
-import { Box, Heading, Text, Flex } from "rebass"
-import { formatDateTime } from "../../utils/date"
-import { Users, Map, ArrowUpRight } from "react-feather"
-import { ImageWithPlaceholder } from "./ImageWithPlaceholder"
-import { IconnedInformation } from "./IconnedInformation"
+import { ArrowUpRight, Map, Users } from "react-feather"
+import { Box, Flex, Heading, Text } from "rebass"
+import { formatDateTime, isPast } from "../../utils/date"
 import { Gradient } from "./Gradient"
+import { IconnedInformation } from "./IconnedInformation"
+import { ImageWithPlaceholder } from "./ImageWithPlaceholder"
+import { Stamp } from "./Stamp"
 
 export function LobbyInformation({ lobby }) {
+    const lobbyIsPast = isPast(new Date(lobby.date))
+
     return (
-        <Box
+        <Flex
+            justifyContent="center"
+            alignItems="center"
             sx={{
-                position: "relative"
+                position: "relative",
             }}
         >
-            <ImageWithPlaceholder width={1} height={300} url={lobby.coverImageUrl} />
+            <ImageWithPlaceholder isPast={lobbyIsPast} width={1} height={300} url={lobby.coverImageUrl} />
+
+            {lobbyIsPast && <Stamp sx={{
+                position: "absolute"
+            }}>Já foi</Stamp>}
 
             <Gradient
                 width={1}
@@ -61,7 +70,7 @@ export function LobbyInformation({ lobby }) {
                     )}
                 </Flex>
             </Gradient>
-        </Box>
+        </Flex>
     )
 }
 
