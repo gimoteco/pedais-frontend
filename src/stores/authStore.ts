@@ -45,9 +45,8 @@ export class AuthStore {
         await this.fetchCurrentUser()
     };
 
-    @action login = () => {
-        // this.currentUser = user;
-        return Promise.resolve()
+    @task.resolved login = (email, password) => {
+        return Auth.signIn(email, password)
     };
 
     @action loginWithFacebook = () => {

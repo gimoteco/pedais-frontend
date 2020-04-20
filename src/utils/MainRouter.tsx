@@ -18,5 +18,5 @@ export function MainRouter() {
 
 export function useGoTo(route, hookParams = {}) {
     const history = useHistory()
-    return (invokeParams) => history.push(generatePath(route.path, invokeParams || hookParams))
+    return (invokeParams: any = undefined) => history.push(generatePath(route.path, invokeParams || hookParams))
 }

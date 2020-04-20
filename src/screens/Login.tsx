@@ -3,10 +3,21 @@ import { inject, observer } from "mobx-react"
 import React from "react"
 import { Form } from "react-final-form"
 import { Box, Button, Flex } from "rebass"
+import { HOME_ROUTE } from "../configuration/routes"
 import { Logo } from "../domains/layout/Logo"
 import { Field } from "../sharedComponents/Field"
+import { IconButton } from "../sharedComponents/IconButton"
+import { useGoTo } from "../utils/MainRouter"
 
 function Login({ authStore }) {
+    const { login } = authStore!
+    const goToHome = useGoTo(HOME_ROUTE)
+
+    async function onSubmit(values) {
+        await login(values.email, values.password)
+        goToHome()
+    }
+
     return (
         <Flex
             height="100vh"
@@ -17,7 +28,7 @@ function Login({ authStore }) {
             width={1}
             p={3}
         >
-            <Form initialValues={{}} onSubmit={console.log}>
+            <Form initialValues={{}} onSubmit={onSubmit}>
                 {({ handleSubmit }) => (
                     <Flex
                         as="form"
@@ -55,9 +66,9 @@ function Login({ authStore }) {
                             />
                         </Box>
 
-                        <Button variant="transparent" mt={3} type="submit">
+                        <IconButton variant="transparent" mt={3} loading={login.pending} type="submit">
                             Entrar
-                        </Button>
+                        </IconButton>
 
                         <Button
                             variant="transparent"
