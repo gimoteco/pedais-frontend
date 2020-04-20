@@ -47,7 +47,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "lint": "npx eslint --fix --ext js,ts,tsx ./"
+        "lint": "npx eslint --ext js,ts,tsx ./"
     },
     "gqless": {
         "url": "http://example.com/graphql",
