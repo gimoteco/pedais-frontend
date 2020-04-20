@@ -20,6 +20,6 @@ const awsmobile = {
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS"
-};
+}
 
-export default awsmobile;
+export default awsmobile
