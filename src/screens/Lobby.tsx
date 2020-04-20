@@ -19,9 +19,9 @@ Pedais - *${lobby.name}*
 
 Data: *${formatDateTime(new Date(lobby.date))}*
 
-${lobby.distance ? `Distância: *${lobby.distance}*` : ""}
+${lobby.distance ? `Distância: *${lobby.distance}km*` : ""}
 ${lobby.elevationGain ? `Ganho de elevação: *${lobby.elevationGain}m*` : ""}
-${lobby.location ? `Local de saída: *${lobby.location}km*` : ""}
+${lobby.location ? `Local de saída: *${lobby.location}*` : ""}
 
 ${lobby.safetyInstructions ? `*Instruções de segurança*: 
 ${lobby.safetyInstructions}` : ""}
