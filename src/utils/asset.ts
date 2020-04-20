@@ -1,7 +1,7 @@
-import { apolloClient } from "../configuration/graphql";
-import { loader } from "graphql.macro";
+import { apolloClient } from "../configuration/graphql"
+import { loader } from "graphql.macro"
 
-const getUploadUrl = loader("../stores/queries/getUploadUrl.graphql");
+const getUploadUrl = loader("../stores/queries/getUploadUrl.graphql")
 
 interface AssetUpload {
     id: string;
@@ -11,24 +11,24 @@ async function generateUploadUrl(filename): Promise<AssetUpload> {
     return (await apolloClient.query({
         query: getUploadUrl,
         variables: { filename }
-    })).data.uploadUrl;
-};
+    })).data.uploadUrl
+}
 
 function uploadFile(file, signedRequest) {
     const options = {
-        method: 'PUT',
+        method: "PUT",
         body: file
-    };
+    }
     return fetch(signedRequest, options)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`${response.status}: ${response.statusText}`);
+                throw new Error(`${response.status}: ${response.statusText}`)
             }
-        });
+        })
 }
 
 function getExtension(filename: string) {
-    return filename.split('.').pop();
+    return filename.split(".").pop()
 }
 
 export async function uploadFileAsset(file: File) {

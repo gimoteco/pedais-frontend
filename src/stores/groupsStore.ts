@@ -1,9 +1,9 @@
 import { observable } from "mobx"
 import { task } from "mobx-task"
 import { apolloClient } from "../configuration/graphql"
-import { loader } from "graphql.macro";
+import { loader } from "graphql.macro"
 
-const getGroups = loader("./queries/getGroups.graphql");
+const getGroups = loader("./queries/getGroups.graphql")
 
 class GroupStore {
     @observable groups = []
@@ -16,7 +16,7 @@ class GroupStore {
         const { data } = await apolloClient.query({
             query: getGroups
         })
-        this.groups = data.groups;
+        this.groups = data.groups
     }
 }
 

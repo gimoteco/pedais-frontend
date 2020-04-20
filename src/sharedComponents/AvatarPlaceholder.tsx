@@ -1,6 +1,6 @@
-import React from "react";
-import { User } from "react-feather";
-import { Box } from "rebass";
+import React from "react"
+import { User } from "react-feather"
+import { Box } from "rebass"
 export function AvatarPlaceholder({ sx, ...otherProps }) {
     return (<Box display="inline-flex" width={40} height={40} color="white" bg="gray" sx={{
         alignItems: "center",
@@ -10,5 +10,5 @@ export function AvatarPlaceholder({ sx, ...otherProps }) {
 
     }} {...otherProps}>
         <User size={25} />
-    </Box>);
+    </Box>)
 }

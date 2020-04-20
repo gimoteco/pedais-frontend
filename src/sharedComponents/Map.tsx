@@ -1,6 +1,6 @@
-import React from "react";
-import { Image, Link } from "rebass";
-import { useValueForBreakpoints } from "./breakpoints";
+import React from "react"
+import { Image, Link } from "rebass"
+import { useValueForBreakpoints } from "./breakpoints"
 
 export const Map = ({ placeName }) => {
     const [width, height] = useValueForBreakpoints([
@@ -12,7 +12,7 @@ export const Map = ({ placeName }) => {
     return <Link target="_blank" href={`https://maps.google.com/?q=${placeName}`}>
         <Image
             sx={{
-                objectFit: 'cover'
+                objectFit: "cover"
             }}
             alt={`Map location of ${placeName}`}
             width={1}

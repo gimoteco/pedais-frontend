@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/react-hooks';
-import { loader } from 'graphql.macro';
-import React from 'react';
-import { Link } from 'rebass';
-const defaultInfoQuery = loader("../../stores/queries/defaultInformations.graphql");
+import { useQuery } from "@apollo/react-hooks"
+import { loader } from "graphql.macro"
+import React from "react"
+import { Link } from "rebass"
+const defaultInfoQuery = loader("../../stores/queries/defaultInformations.graphql")
 
 export function SuggestDefaultSafetyWarning({ onChange }: {
     onChange?(text: string): void

@@ -1,9 +1,9 @@
-import React from "react";
-import { Box, Text } from "rebass";
+import React from "react"
+import { Box, Text } from "rebass"
 
 export function Section({ title, children, showIf = true }) {
     if (!showIf)
-        return null;
+        return null
     return (<Box mb={3} sx={{
         textTransform: "uppercase",
         fontFamily: "body"
@@ -15,5 +15,5 @@ export function Section({ title, children, showIf = true }) {
         </Text>
 
         {children}
-    </Box>);
+    </Box>)
 }

@@ -1,10 +1,10 @@
-import { loader } from "graphql.macro";
-import { observable } from "mobx";
-import { task } from 'mobx-task';
-import { apolloClient } from "../configuration/graphql";
-import { Lobby } from "./types";
+import { loader } from "graphql.macro"
+import { observable } from "mobx"
+import { task } from "mobx-task"
+import { apolloClient } from "../configuration/graphql"
+import { Lobby } from "./types"
 
-const getLobbies = loader("./queries/getLobbies.graphql");
+const getLobbies = loader("./queries/getLobbies.graphql")
 
 export class LobbiesStore {
   @observable lobbies: Lobby[] = [];
@@ -12,16 +12,16 @@ export class LobbiesStore {
   @observable uploadUrl?: string;
 
   constructor() {
-    this.fetchLobbies();
+      this.fetchLobbies()
   }
 
   @task fetchLobbies = async () => {
-    const result = await apolloClient.query({
-      query: getLobbies
-    });
-    this.lobbies = result.data.nextParties ?? [];
-    this.myParties = result.data.myParties ?? [];
+      const result = await apolloClient.query({
+          query: getLobbies
+      })
+      this.lobbies = result.data.nextParties ?? []
+      this.myParties = result.data.myParties ?? []
   };
 }
 
-export default new LobbiesStore();
+export default new LobbiesStore()

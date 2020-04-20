@@ -1,5 +1,5 @@
-import { format } from "date-fns";
+import { format } from "date-fns"
 
 export function formatDateTime(datetime: Date) {
-  return format(datetime, "dd/MM/yyyy - HH:mm");
+    return format(datetime, "dd/MM/yyyy - HH:mm")
 }
