@@ -41,7 +41,7 @@ function Lobbies({ lobbiesStore }) {
         ))}
       </Section>
 
-      <Section title="Próximos pedais">
+      <Section showIf={lobbies && lobbies.length} title="Próximos pedais">
         {lobbies.map(lobby => (
           <Card onClick={() => goToLobby(lobby)} key={lobby.id} lobby={lobby} />
         ))}
