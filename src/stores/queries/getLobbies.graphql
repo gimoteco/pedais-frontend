@@ -15,8 +15,8 @@ fragment PartyCardInfo on Party {
     }
 }
 
-query getLobbies {
-  nextParties {
+query getLobbies($showPast: Boolean) {
+  parties(showPast: $showPast) {
     ...PartyCardInfo
   }
   myParties {

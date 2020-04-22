@@ -129,6 +129,17 @@ export const theme = {
             fontFamily: "body",
             fontWeight: "bold"
         },
+        switch: {
+            backgroundColor: "white",
+            borderColor: "secondary",
+            "&[aria-checked=true]": {
+                backgroundColor: rgba(colors.secondary, 0.4),
+            },
+            thumb: {
+                backgroundColor: "secondary",
+                borderColor: "secondary"
+            }
+        },
         textarea: {
             color: "text",
             fontFamily: "body",
