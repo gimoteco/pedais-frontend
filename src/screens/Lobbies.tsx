@@ -7,6 +7,7 @@ import { BasePage } from "../domains/layout/BasePage"
 import { Card } from "../domains/lobby/LobbyCard"
 import { IconButton } from "../sharedComponents/IconButton"
 import { Switch } from "../sharedComponents/Switch"
+import { lobbyIsPast } from "../stores/lobbyStore"
 import { useGoTo } from "../utils/MainRouter"
 
 function Section({ children, title, showIf = true, ifHidden = null, afterTitle }: { children: JSX.Element | JSX.Element[], title: string, showIf?: boolean, ifHidden?: JSX.Element | null, afterTitle?: JSX.Element }) {
@@ -42,7 +43,7 @@ function Lobbies({ lobbiesStore }) {
 
             <Section showIf={myParties && myParties.length} title="Meus pedais">
                 {myParties.map(party => (
-                    <Card onClick={() => goToLobby(party)} key={party.id} lobby={party} />
+                    <Card isPast={lobbyIsPast(party)} onClick={() => goToLobby(party)} key={party.id} lobby={party} />
                 ))}
             </Section>
 
@@ -50,8 +51,8 @@ function Lobbies({ lobbiesStore }) {
                 <Switch checked={showPast} onChange={toggleShowPast} label="Exibir passados" />
             }>
 
-                {lobbies.map(lobby => (
-                    <Card onClick={() => goToLobby(lobby)} key={lobby.id} lobby={lobby} />
+                {lobbies.map(party => (
+                    <Card isPast={lobbyIsPast(party)} onClick={() => goToLobby(party)} key={party.id} lobby={party} />
                 ))}
 
                 {!lobbies?.length && <p>Nenhum pedal pra exibir</p>}

@@ -32,7 +32,6 @@ export class LobbiesStore {
     @action toggleShowPast = () => {
         this.showPast = !(this.showPast)
     }
-
 }
 
 export default new LobbiesStore()

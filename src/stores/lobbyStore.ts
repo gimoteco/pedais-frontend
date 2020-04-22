@@ -1,4 +1,5 @@
 import { gql } from "apollo-boost"
+import isPast from "date-fns/isPast"
 import { loader } from "graphql.macro"
 import { computed, observable } from "mobx"
 import { task } from "mobx-task"
@@ -8,57 +9,65 @@ import { Lobby, User } from "./types"
 
 const getLobby = loader("./queries/getLobby.graphql")
 
+export function lobbyIsPast(lobby: { date: string }) {
+    return isPast(new Date(lobby.date))
+}
+
 export class LobbyStore {
-  authStore: AuthStore;
-  @observable lobby: Lobby | null = null;
-  @observable interested: User[] = [];
+    authStore: AuthStore;
+    @observable lobby: Lobby | null = null;
+    @observable interested: User[] = [];
 
-  constructor(authStore) {
-      this.authStore = authStore
-  }
+    constructor(authStore) {
+        this.authStore = authStore
+    }
 
-  @task.resolved toggleInterest = async (id: string) => {
-      const result = await apolloClient.mutate({
-          mutation: gql`
+    @task.resolved toggleInterest = async (id: string) => {
+        const result = await apolloClient.mutate({
+            mutation: gql`
         mutation toggleInterest($id: String!) {
           toggleInterest(id: $id) 
         }
       `,
-          variables: {
-              id
-          }
-      })
+            variables: {
+                id
+            }
+        })
 
-      const currentUser = this.authStore.domainUser
+        const currentUser = this.authStore.domainUser
 
-      this.interested = this.currentUserIsInterested ? this.interested.filter(i => i.id !== currentUser.id) : [
-          {
-              id: currentUser.id,
-              email: currentUser.email,
-              avatarUrl: currentUser.avatarUrl
-          },
-          ...this.interested
-      ]
-      return result
-  };
+        this.interested = this.currentUserIsInterested ? this.interested.filter(i => i.id !== currentUser.id) : [
+            {
+                id: currentUser.id,
+                email: currentUser.email,
+                avatarUrl: currentUser.avatarUrl
+            },
+            ...this.interested
+        ]
+        return result
+    };
 
-  @task fetchLobby = async (id: string) => {
-      const result = await apolloClient.query({
-          query: getLobby,
-          variables: {
-              id
-          }
-      })
-      this.lobby = result.data.party
-      this.interested = result.data.party.interested
-  };
+    @task fetchLobby = async (id: string) => {
+        const result = await apolloClient.query({
+            query: getLobby,
+            variables: {
+                id
+            }
+        })
+        this.lobby = result.data.party
+        this.interested = result.data.party.interested
+    };
 
-  @computed get currentUserIsInterested() {
-      return (
-          this.authStore.isLogged &&
-      this.interested.map(i => i.id).includes(this.authStore.domainUser?.id)
-      )
-  }
+    @computed get currentUserIsInterested() {
+        return (
+            this.authStore.isLogged &&
+            this.interested.map(i => i.id).includes(this.authStore.domainUser?.id)
+        )
+    }
+
+    @computed get lobbyIsPast() {
+        return this.lobby ? lobbyIsPast(this.lobby) : false
+    }
 }
 
 export default new LobbyStore(authStore)

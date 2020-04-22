@@ -1,15 +1,13 @@
 import React from "react"
 import { ArrowUpRight, Map, Users } from "react-feather"
 import { Box, Flex, Heading, Text } from "rebass"
-import { formatDateTime, isPast } from "../../utils/date"
+import { formatDateTime } from "../../utils/date"
 import { Gradient } from "./Gradient"
 import { IconnedInformation } from "./IconnedInformation"
 import { ImageWithPlaceholder } from "./ImageWithPlaceholder"
 import { Stamp } from "./Stamp"
 
-export function LobbyInformation({ lobby }) {
-    const lobbyIsPast = isPast(new Date(lobby.date))
-
+export function LobbyInformation({ lobby, isPast: lobbyIsPast }) {
     return (
         <Flex
             justifyContent="center"
@@ -74,7 +72,7 @@ export function LobbyInformation({ lobby }) {
     )
 }
 
-export const Card = ({ lobby, onClick }) => {
+export const Card = ({ lobby, onClick, isPast }) => {
     return (
         <Box
             mb={3}
@@ -85,7 +83,7 @@ export const Card = ({ lobby, onClick }) => {
             }}
             onClick={onClick}
         >
-            <LobbyInformation lobby={lobby} />
+            <LobbyInformation lobby={lobby} isPast={isPast} />
         </Box>
     )
 }

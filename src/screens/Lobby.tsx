@@ -30,8 +30,9 @@ Confirme sua participação em: `
 
 function Lobby({ lobbyStore }) {
     const { id } = useParams()
-    const { lobby, currentUserIsInterested, toggleInterest, interested, fetchLobby: { pending: loadingFetchLobby } } = lobbyStore
+    const { lobby, currentUserIsInterested, toggleInterest, interested, fetchLobby: { pending: loadingFetchLobby }, lobbyIsPast } = lobbyStore
     const location = window.location
+
     useEffect(() => {
         lobbyStore.fetchLobby(id)
     }, [id, lobbyStore])
@@ -41,9 +42,9 @@ function Lobby({ lobbyStore }) {
     return (
         <BasePage title={title} noPadding loading={loadingFetchLobby}>
             {lobby && <>
-                <LobbyInformation lobby={lobby} />
+                <LobbyInformation isPast={lobbyIsPast} lobby={lobby} />
 
-                <Box padding={2}>
+                {!lobbyIsPast && <Box padding={2}>
                     <IconButton
                         Icon={currentUserIsInterested ? UserMinus : UserPlus}
                         loading={toggleInterest.pending}
@@ -59,7 +60,7 @@ function Lobby({ lobbyStore }) {
                             Divulgar pelo whats app
                         </IconButton>
                     </WhatsappShareButton>
-                </Box>
+                </Box>}
 
                 <Box p={2} color="text">
                     <Section title="Informações gerais">
