@@ -39,7 +39,7 @@ const defaultButton = {
     fontWeight: "bold",
     textTransform: "uppercase",
     padding: 3,
-    fontSize: 3,
+    fontSize: [1, 2],
     svg: {
         marginRight: 2
     }
@@ -106,7 +106,8 @@ export const theme = {
             borderColor: "white",
             borderWidth: 1,
             borderStyle: "solid",
-            bg: "transparent"
+            bg: "transparent",
+
         }
     },
     variants: {

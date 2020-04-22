@@ -47,6 +47,7 @@ function Login({ authStore }) {
                                 variant="login"
                                 input={
                                     <Input
+                                        required
                                         type="email"
                                         name="email"
                                         placeholder="seu@email.com.br"
@@ -61,7 +62,7 @@ function Login({ authStore }) {
                                 label="Senha"
                                 variant="login"
                                 input={
-                                    <Input type="password" name="password" placeholder="senha" />
+                                    <Input required type="password" name="password" placeholder="senha" />
                                 }
                             />
                         </Box>
