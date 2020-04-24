@@ -7,3 +7,4 @@ This project uses:
 - React Final Form for form handling
 - Mobx to control/store the state
 - AWS Cognito Auth integrated w/ facebook
+- Github Actions to CI/CD
